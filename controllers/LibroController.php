@@ -18,12 +18,17 @@ class LibroController extends Controller
     // Metodo show(): Muestra los detalles de un libro
     public function show(int $id = 0)
     {
+        // Comprobar que revcibimos el id del libro por parámetro   
+        if (!$id) {
+            throw new Exception("No se indicó el libro");
+        }
+
         // Recupera el libro con el id especificado
-        $libro = Libro::all($id);
+        $libro = Libro::getById($id);
 
         // Si no existe el libro mostramos un error
         if (!$libro) {
-            
+            throw new Exception("No se encontró el libro $id");
         }
 
         // Carga la vista para mostrar detalles de un libro
