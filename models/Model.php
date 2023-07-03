@@ -17,10 +17,11 @@
  * última revisión: 29/06/2023
  */
 
-class Model{
-         
-    
-    
+class Model
+{
+
+
+
     /**
      * Retorna el nombre de la tabla, que será el nombre indicado en la propiedad
      * estática $table de la clase hija. En caso de no existir esta propiedad, 
@@ -29,23 +30,25 @@ class Model{
      * 
      * @return string nombre de la tabla correspondiente con el modelo actual.
      */
-    protected static function getTable():string{
-        return get_called_class()::$table ?? strtolower(get_called_class()).'s';
+    protected static function getTable(): string
+    {
+        return get_called_class()::$table ?? strtolower(get_called_class()) . 's';
     }
-    
-    
-    
+
+
+
     /**
      * Retorna la lista de campos de tipo JSON definidos en el modelo.
      *  
      * @return array lista de campos JSON.
      */
-    protected static function getJsonFields():array{
+    protected static function getJsonFields(): array
+    {
         return get_called_class()::$jsonFields ?? [];
     }
-    
-    
-    
+
+
+
     /**
      * Convierte los campos JSON en arrays.
      * Se utiliza, por ejemplo, para recuperar correctamente
@@ -54,18 +57,19 @@ class Model{
      * 
      * @return object el mismo objeto sobre el que se aplica el método.
      */
-    public function parseJsonFields():object{
-        
+    public function parseJsonFields(): object
+    {
+
         $properties = self::getJsonFields();
-                    
-        foreach($properties as $property)
+
+        foreach ($properties as $property)
             $this->$property = array_unique(json_decode($this->$property, JSON_OBJECT_AS_ARRAY));
-        
+
         return $this;
     }
-    
-    
-    
+
+
+
     /**
      * Recupera todas las entidades y las retorna en un array.
      * 
@@ -75,26 +79,26 @@ class Model{
      * @return array lista de todas las entidades
      */
     public static function all(
-        int $limit = 0,    
-        int $offset = 0    
-    ):array{
-        
+        int $limit = 0,
+        int $offset = 0
+    ): array {
+
         $table = self::getTable(); // recupera el nombre de la tabla
-        
+
         // prepara la consulta y la ejecuta
         $query = "SELECT * FROM $table ";
-        $query .= $limit? "LIMIT $limit OFFSET $offset" :"";
-        
+        $query .= $limit ? "LIMIT $limit OFFSET $offset" : "";
+
         $entities = (DB_CLASS)::selectAll($query, get_called_class());
-        
-        foreach($entities as $entity)
+
+        foreach ($entities as $entity)
             $entity->parseJsonFields();
-        
+
         return $entities;
     }
-    
-      
-    
+
+
+
     /**
      * Alias de all(). 
      * 
@@ -108,12 +112,12 @@ class Model{
     public static function get(
         int $limit = 0,
         int $offset = 0
-    ):array{
+    ): array {
         return get_called_class()::all($limit, $offset);
     }
-    
-    
-    
+
+
+
     /**
      * Recupera una entidad concreta a partir de su identificador único.
      *  
@@ -121,20 +125,21 @@ class Model{
      * 
      * @return object|NULL un objeto del tipo entidad o NULL si no lo encuentra.
      */
-    public static function find(int $id = 0):?object{
+    public static function find(int $id = 0): ?object
+    {
         $table = self::getTable(); // recupera el nombre de la tabla
-        
+
         $query = "SELECT * FROM $table WHERE id=$id";
         $entity = (DB_CLASS)::select($query, get_called_class());
-        
-        if($entity)
+
+        if ($entity)
             $entity->parseJsonFields();
-        
+
         return $entity;
     }
-    
 
-    
+
+
     /**
      * Alias de find().
      * 
@@ -144,12 +149,13 @@ class Model{
      * 
      * @return object|NULL un objeto del tipo entidad o NULL si no lo encuentra.
      */
-    public static function getById(int $id = 0):?object{
-         return get_called_class()::find($id);
+    public static function getById(int $id = 0): ?object
+    {
+        return get_called_class()::find($id);
     }
-    
-    
-    
+
+
+
     /**
      * 
      * Recupera una entidad a partir de su identificador único o falla.
@@ -159,15 +165,16 @@ class Model{
      * @throws NotFoundException si no encuentra la entidad con ese identificador.
      * @return object la entidad recuperada.
      */
-    public static function findOrFail(int $id = 0):object{
+    public static function findOrFail(int $id = 0): object
+    {
         $entity = get_called_class()::find($id);
-        
-        if(!$entity)
+
+        if (!$entity)
             throw new NotFoundException("No se encontró lo que buscas.");
-        
+
         return $entity;
     }
-    
+
     /**
      * Recupera entidades con un orden concreto.
      * 
@@ -179,29 +186,29 @@ class Model{
      * @return array lista de entidades recuperadas.
      */
     public static function orderBy(
-        string $orderField = 'id',    
-        string $order = 'ASC', 
-        int $limit = 0,          
-        int $offset = 0          
-    ):array{
-        
+        string $orderField = 'id',
+        string $order = 'ASC',
+        int $limit = 0,
+        int $offset = 0
+    ): array {
+
         $table = self::getTable(); // recupera el nombre de la tabla
-        
+
         $query = "SELECT *
                   FROM $table
                   ORDER BY $orderField $order ";
 
-        $query .= $limit? "LIMIT $limit OFFSET $offset" :"";
-        
+        $query .= $limit ? "LIMIT $limit OFFSET $offset" : "";
+
         $entities = (DB_CLASS)::selectAll($query, get_called_class());
-        
-        foreach($entities as $entity)
+
+        foreach ($entities as $entity)
             $entity->parseJsonFields();
-            
+
         return $entities;
     }
-    
-    
+
+
 
     /**
      * Recupera entidades a partir de un filtro.
@@ -214,30 +221,30 @@ class Model{
      * @return array lista de entidades con el filtro aplicado.
      */
     public static function getFiltered(
-        string $field = 'id',    
-        string $value = '',      
-        string $orderField = 'id',    
-        string $order = 'ASC'  
-    ):array{
-            
+        string $field = 'id',
+        string $value = '',
+        string $orderField = 'id',
+        string $order = 'ASC'
+    ): array {
+
         $table = self::getTable(); // recupera el nombre de la tabla
-        
-        $consulta="SELECT *
+
+        $consulta = "SELECT *
                    FROM $table
                    WHERE $field LIKE '%$value%'
                    ORDER BY $orderField $order";
-        
+
         $entities = (DB_CLASS)::selectAll($consulta, get_called_class());
-        
-        
-        foreach($entities as $entity)
+
+
+        foreach ($entities as $entity)
             $entity->parseJsonFields();
-            
+
         return $entities;
     }
-    
-    
-    
+
+
+
     /**
      * Recupera entidades a partir de un objeto Filter. Se combina con la paginación
      * gracias a los parámetros limit y offset.
@@ -249,29 +256,29 @@ class Model{
      * @return array lista de entidades con el filtro aplicado.
      */
     public static function filter(
-        Filter $filtro,                 
-        int $limit = RESULTS_PER_PAGE,  
-        int $offset = 0                         
-    ):array{
-            
-            $tabla = self::getTable(); // recupera el nombre de la tabla
-            
-            $consulta="SELECT *
+        Filter $filtro,
+        int $limit = RESULTS_PER_PAGE,
+        int $offset = 0
+    ): array {
+
+        $tabla = self::getTable(); // recupera el nombre de la tabla
+
+        $consulta = "SELECT *
                        FROM $tabla
                        WHERE $filtro->field LIKE '%$filtro->text%'
                        ORDER BY $filtro->orderField $filtro->order 
                        LIMIT $limit 
                        OFFSET $offset ";
-            
-            $entities = (DB_CLASS)::selectAll($consulta, get_called_class());
-            
-            foreach($entities as $entity)
-                $entity->parseJsonFields();
-                
-            return $entities;
+
+        $entities = (DB_CLASS)::selectAll($consulta, get_called_class());
+
+        foreach ($entities as $entity)
+            $entity->parseJsonFields();
+
+        return $entities;
     }
-    
-    
+
+
     /**
      * Calcula el total de resultados a partir de un objeto filter.
      * 
@@ -279,24 +286,25 @@ class Model{
      * 
      * @return int total de resultados tras aplicar el filtro.
      */
-    public static function filteredResults(Filter $filtro):int{
-        
+    public static function filteredResults(Filter $filtro): int
+    {
+
         $tabla = self::getTable(); // recupera el nombre de la tabla
-        
-        $consulta="SELECT COUNT(*) AS total
+
+        $consulta = "SELECT COUNT(*) AS total
                        FROM $tabla
                        WHERE $filtro->field LIKE '%$filtro->text%'
                        ORDER BY $filtro->orderField $filtro->order ";
-        
+
         $entities = ((DB_CLASS)::select($consulta))->total;
-        
-        foreach($entities as $entity)
+
+        foreach ($entities as $entity)
             $entity->parseJsonFields();
-            
+
         return $entities;
     }
-    
-    
+
+
     /**
      * Recupera entidades a partir de múltiples condiciones de filtrado.
      * 
@@ -307,129 +315,147 @@ class Model{
      * @return array lista de entidades con los filtros aplicados.
      */
     public static function where(
-        array $condiciones = [],    
-        string $orden = 'id',    
-        string $sentido = 'ASC'  
-    ):array{
-        
+        array $condiciones = [],
+        string $orden = 'id',
+        string $sentido = 'ASC'
+    ): array {
+
         $tabla = self::getTable(); // recupera el nombre de la tabla
-        
-        $consulta="SELECT * FROM $tabla ";
-        
-        if(sizeof($condiciones)){
+
+        $consulta = "SELECT * FROM $tabla ";
+
+        if (sizeof($condiciones)) {
             $consulta .= "WHERE ";
-            
-            foreach($condiciones as $campo => $valor)
+
+            foreach ($condiciones as $campo => $valor)
                 $consulta .= " $campo LIKE '%$valor%' AND ";
-                
-            $consulta = substr($consulta, 0, strlen($consulta)-4);
+
+            $consulta = substr($consulta, 0, strlen($consulta) - 4);
         }
-        
+
         $consulta .= "ORDER BY $orden $sentido";
-       
+
         $entities = (DB_CLASS)::selectAll($consulta, get_called_class());
-        
-        foreach($entities as $entity)
+
+        foreach ($entities as $entity)
             $entity->parseJsonFields();
-            
+
         return $entities;
     }
-    
-    
-    
+
+
+
     /**
      * Guarda una entidad en la base de datos.
      * 
      * @return int el autonumérico asignado en la base de datos o 0 si la tabla no dispone de autonumérico.
      */
-    public function save():int{
-        
+    public function save(): int
+    {
+
         $tabla = self::getTable(); // recupera el nombre de la tabla
-        
+
         // prepara la consulta de inserción (esta es más compleja)
-        $consulta="INSERT INTO $tabla (";
-        
+        $consulta = "INSERT INTO $tabla (";
+
         // nombres de los campos
-        foreach($this as $propiedad=>$valor)
+        foreach ($this as $propiedad => $valor)
             $consulta .= "$propiedad, ";
-            
+
         $consulta = rtrim($consulta, ', '); // quita la última coma
         $consulta .= ") VALUES (";
-        
+
         // valores
-        foreach($this as $valor)
+        foreach ($this as $valor)
             // pone comillas en el SQL solo para los string
             // también controla los valores nulos
-            switch(gettype($valor)){
-                case "string" : $consulta .= "'$valor', "; break;
-                case "NULL"   : $consulta .= "NULL, "; break;
-                case "array"  : $consulta .= "'".json_encode($valor)."', "; break;  
-                default       : $consulta .= "$valor, ";
-        }
-        
+            switch (gettype($valor)) {
+                case "string":
+                    $consulta .= "'$valor', ";
+                    break;
+                case "NULL":
+                    $consulta .= "NULL, ";
+                    break;
+                case "array":
+                    $consulta .= "'" . json_encode($valor) . "', ";
+                    break;
+                default:
+                    $consulta .= "$valor, ";
+            }
+
         $consulta = rtrim($consulta, ', '); // quita la última coma
         $consulta .= ")";
-        
+
         $this->id = (DB_CLASS)::insert($consulta); // guarda el nuevo objeto
-        
+
         // retorna el id del nuevo objeto
         return $this->id;
     }
-    
-    
+
+
     /**
      * Actualiza los datos de una entidad en la base de datos.
      * 
      * @return int el número de filas afectadas.
      */
-    public function update():int{
-        
+    public function update(): int
+    {
+
         $tabla = self::getTable(); // recupera el nombre de la tabla
-        
+
         // prepara la consulta
-        $consulta="UPDATE $tabla SET ";
-        
+        $consulta = "UPDATE $tabla SET ";
+
         // pone comillas en el SQL solo para los string
-        foreach($this as $propiedad=>$valor)
-            switch(gettype($valor)){
-                case "string" : $consulta .= "$propiedad='$valor', "; break;
-                case "NULL"   : $consulta .= "$propiedad=NULL, "; break;
-                case "array"  : $consulta .= "$propiedad='".json_encode($valor)."', "; break;  
-                default       : $consulta .= "$propiedad=$valor, ";
-        }
-        
+        foreach ($this as $propiedad => $valor)
+            switch (gettype($valor)) {
+                case "string":
+                    $consulta .= "$propiedad='$valor', ";
+                    break;
+                case "NULL":
+                    $consulta .= "$propiedad=NULL, ";
+                    break;
+                case "array":
+                    $consulta .= "$propiedad='" . json_encode($valor) . "', ";
+                    break;
+                default:
+                    $consulta .= "$propiedad=$valor, ";
+            }
+
         $consulta = rtrim($consulta, ', '); // quita la última coma
         $consulta .= " WHERE id=$this->id";
 
         // lanza la consulta y retorna el número de filas afectadas
         return (DB_CLASS)::update($consulta);
     }
-    
-        
+
+
     /**
      * Elimina una entidad de la base de datos a partir de su identificador único.
      * 
      * @param int $id el identificador único de la entidad.
      * @return int el número de filas afectadas.
      */
-    public static function delete(int $id):int{
-        
+    public static function delete(int $id): int
+    {
+
         $tabla = self::getTable(); // recupera el nombre de la tabla
-        
-        $consulta="DELETE FROM $tabla WHERE id=$id";
+
+        $consulta = "DELETE FROM $tabla WHERE id=$id";
         return (DB_CLASS)::delete($consulta);
     }
-    
-    
+
+
     /**
      * Elimina una entidad de la base de datos.
      * 
      * @return int el número de filas afectadas.
      */
-    public function deleteObject():int{
+    public function deleteObject(): int
+    {
         return self::delete($this->id);
     }
-    
+
     /**
      * Realiza consultas de totales.
      * 
@@ -440,47 +466,49 @@ class Model{
     public static function total(
         string $operacion = 'COUNT',
         string $campo = '*'
-    ){
+    ) {
         $tabla = self::getTable(); // recupera el nombre de la tabla
-        
+
         return (DB_CLASS)::total($tabla, $operacion, $campo);
     }
-    
-    
-    
+
+
+
     /**
      * Sanea las propiedades de tipo string de un modelo
      * 
      * @param bool $entities convertir entidades HTML.
      * @return mixed el modelo con los strings saneados.
      */
-    public function saneate(bool $entities = true):mixed{
-        
-        foreach($this as $propiedad => $valor)
-            if(gettype($valor) == 'string')
+    public function saneate(bool $entities = true): mixed
+    {
+
+        foreach ($this as $propiedad => $valor)
+            if (gettype($valor) == 'string')
                 $this->$propiedad = (DB_CLASS)::escape($valor, $entities);
-           
+
         return $this;
     }
-    
+
 
     /**
      * Quita espacios en blanco al inicio y final de las propiedades de tipo string.
      * 
      * @return mixed el modelo con los strings sin espacios en blanco al inicio o final.
      */
-    public function trim():mixed{
-        
-        foreach($this as $propiedad => $valor){
-            if(gettype($valor) == 'string')
+    public function trim(): mixed
+    {
+
+        foreach ($this as $propiedad => $valor) {
+            if (gettype($valor) == 'string')
                 $this->$propiedad = trim($valor);
         }
-        
+
         return $this;
     }
-    
-    
-    
+
+
+
     /**
      * Recupera entidades relacionadas en relaciones 1 a N.
      * EJEMPLO: $propietario->hasMany(string $entidad, string $foranea, string $local):array
@@ -502,22 +530,22 @@ class Model{
         string $related,            // clase (entidad) relacionada
         string $foreignKey = null,  // clave foránea
         string $localKey = 'id'     // clave local
-    ):array{
-        
-        $tabla = $related::$table ?? strtolower($related).'s';   // cálculo del nombre de la tabla
-        
-        $foreignKey = $foreignKey ?? 'id'.strtolower(get_called_class());  // cálculo foranea
-        
-        $consulta = "SELECT * FROM $tabla WHERE $foreignKey = ".$this->$localKey; // consulta
+    ): array {
+
+        $tabla = $related::$table ?? strtolower($related) . 's';   // cálculo del nombre de la tabla
+
+        $foreignKey = $foreignKey ?? 'id' . strtolower(get_called_class());  // cálculo foranea
+
+        $consulta = "SELECT * FROM $tabla WHERE $foreignKey = " . $this->$localKey; // consulta
         $entities =  (DB_CLASS)::selectAll($consulta, $related);
-        
-        foreach($entities as $entity)
+
+        foreach ($entities as $entity)
             $entity->parseJsonFields();
-            
+
         return $entities;
     }
-    
-    
+
+
 
     /**
      * Método que recupera objetos relacionados en relación 1 a N de forma inversa.
@@ -539,38 +567,37 @@ class Model{
         string $related,
         string $foreignKey = null,
         string $ownerKey = 'id'
-    ):?object{
-        
-        $tabla = $related::$table ?? strtolower($related).'s';   // cálculo del nombre de la tabla
-        
-        $foreignKey = $foreignKey ?? 'id'.strtolower($related);  // cálculo  foranea
-        
-        $consulta="SELECT * FROM $tabla WHERE $ownerKey = ".$this->$foreignKey;
+    ): ?object {
+
+        $tabla = $related::$table ?? strtolower($related) . 's';   // cálculo del nombre de la tabla
+
+        $foreignKey = $foreignKey ?? 'id' . strtolower($related);  // cálculo  foranea
+
+        $consulta = "SELECT * FROM $tabla WHERE $ownerKey = " . $this->$foreignKey;
         $entity = (DB_CLASS)::select($consulta, $related);
-        
-        if($entity)
+
+        if ($entity)
             $entity->parseJsonFields();
-        
+
         return $entity;
     }
-    
-    
+
+
     /**
      * Método __toString()
      * 
      * @return string
      */
-    public function __toString():string{
-        
+    public function __toString(): string
+    {
+
         $texto = '';
-        
-        foreach($this as $propiedad => $valor){
-            $texto .= is_array($valor) ? 
-                "$propiedad: [ ".implode(', ',$valor)." ]" :
+
+        foreach ($this as $propiedad => $valor) {
+            $texto .= is_array($valor) ?
+                "$propiedad: [ " . implode(', ', $valor) . " ]" :
                 "$propiedad: <b>$valor</b>, ";
         }
         return rtrim($texto, ', '); // quita la última coma
     }
 }
-
-
