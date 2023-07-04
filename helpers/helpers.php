@@ -52,3 +52,9 @@ function redirect(
 ) {
     URL::redirect($url, $delay, $die);
 }
+
+// Acortar un texto a un número de caracteres
+function shorten(string $text, int $length = 20): string
+{
+    return strlen($text) > $length ? substr($text, 0, $length) . '...' : $text;
+}
