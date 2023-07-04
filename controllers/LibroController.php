@@ -24,7 +24,7 @@ class LibroController extends Controller
         }
 
         // Recupera el libro con el id especificado
-        $libro = Libro::getById($id);
+        $libro = Libro::find($id);
 
         // Si no existe el libro mostramos un error
         if (!$libro) {
@@ -33,5 +33,12 @@ class LibroController extends Controller
 
         // Carga la vista para mostrar detalles de un libro
         $this->loadView('libro/show', ['libro' => $libro]);
+    }
+
+    // Metodo create(): Muestra el formulario para crear un libro
+    public function create()
+    {
+        // Carga la vista para crear un libro
+        $this->loadView('libro/create');
     }
 }
