@@ -121,13 +121,10 @@ class SocioController extends Controller
         }
 
         // Recuperamos el resto de campos
-        $socio->isbn = $_POST['isbn'];
-        $socio->titulo = $_POST['titulo'];
-        $socio->editorial = $_POST['editorial'];
-        $socio->autor = $_POST['autor'];
-        $socio->idioma = $_POST['idioma'];
-        $socio->ediciones = intval($_POST['ediciones']);
-        $socio->edadrecomendada = intval($_POST['edadrecomendada']);
+        $socio->dni = $_POST['dni'];
+        $socio->nombre = $_POST['nombre'];
+        $socio->apellidos = $_POST['apellidos'];
+        $socio->poblacion = $_POST['poblacion'];
 
         // Guardar el socio en la base de datos
         try {

@@ -27,29 +27,38 @@
             <?= $libro->titulo ?>
         </h2>
 
-        <p>
-            <strong>Autor:</strong>
-            <?= $libro->autor ?>
+        <div>
+            <p>
+                <strong>Autor:</strong>
+                <?= $libro->autor ?>
 
-            <br>
+                <br>
 
-            <strong>Editorial:</strong>
+                <strong>Editorial:</strong>
 
-            <?= $libro->editorial ?>
+                <?= $libro->editorial ?>
 
-            <br>
+                <br>
 
-            <strong>ISBN:</strong>
+                <strong>ISBN:</strong>
 
-            <?= $libro->isbn ?>
+                <?= $libro->isbn ?>
 
-            <br>
+                <br>
 
-            <strong>Edad recomendada:</strong>
+                <strong>Edad recomendada:</strong>
 
-            <?= " $libro->edadrecomendada años" ?>
+                <?= " $libro->edadrecomendada años" ?>
+            </p>
+        </div>
 
-        </p>
+        <div>
+            <!-- Botones para volver, editar y borrar -->
+            <a class="button" href="/Libro">Volver</a>
+            <a class="button" href="/Libro/edit/<?= $libro->id ?>">Editar</a>
+            <a class="button" href="/Libro/delete/<?= $libro->id ?>">Borrar</a>
+        </div>
+
 
 
 

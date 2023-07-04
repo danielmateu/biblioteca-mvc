@@ -18,6 +18,38 @@
 
     <main>
 
+        <div class="">
+            <p>
+                <!-- DNI -->
+                <strong>DNI:</strong>
+                <?= $socio->dni ?>
+
+                <br>
+                <!-- Nombre del socio -->
+                <strong>Nombre:</strong>
+                <?= "$socio->nombre $socio->apellidos" ?>
+
+                <br>
+                <!-- Población -->
+                <strong>Población:</strong>
+                <?= $socio->poblacion ?>
+
+                <!-- Imagen socio -->
+                <!-- <strong>Imagen:</strong>
+                <br> -->
+                <!-- <img src="../../public/images/profile.png" alt="Imagen del socio"> -->
+            </p>
+
+
+        </div>
+
+        <div>
+            <!-- Botones para volver, editar y borrar -->
+            <a class="button" href="/Socio">Volver</a>
+            <a class="button" href="/Socio/edit/<?= $socio->id ?>">Editar</a>
+            <a class="button" href="/Socio/delete/<?= $socio->id ?>">Borrar</a>
+        </div>
+
     </main>
 
     <?= Template::getFooter() ?>
