@@ -4,24 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= APP_NAME ?></title>
+    <title><?= APP_NAME ?> - edición</title>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <?= Template::getCss() ?>
 </head>
 
 <body>
     <?= Template::getLogin() ?>
-    <?php
-    // Titulo acortado
-    $tituloAcortado = shorten($libro->titulo, 15);
-    ?>
-    <?= Template::getHeader("Libro: $tituloAcortado") ?>
+    <?= Template::getHeader('Edición de libro') ?>
     <?= Template::getMenu() ?>
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
 
     <main>
-        <!-- <h1><?= APP_NAME ?></h1> -->
 
         <h2>
             <?= $libro->titulo ?>
