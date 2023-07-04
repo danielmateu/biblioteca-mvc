@@ -52,22 +52,37 @@ class SocioController extends Controller
             throw new Exception('No se recibieron datos');
         }
 
+        // Comprobar si hay un DNI igual en la base de datos
+        // if (socio::find($_POST['id'])) {
+        //     Session::flash('error', 'Ya existe un socio con ese DNI');
+        //     redirect('/socio/create');
+
+        //     // Si estamos en modo debug, iremos a la página de error
+        //     if (DEBUG) {
+        //         throw new Exception('Ya existe un socio con ese DNI');
+        //     } else {
+        //         // Si no estamos en modo debug, redireccionamos al formulario de creación
+        //         redirect('/socio/create');
+        //     }
+        // }
+
         // Crear el socio
         $socio = new socio();
 
         // Recuperar los datos recibidos por POST
-        // $socio->id = $_POST['id'];
-
+        $socio->dni = $_POST['dni'];
+        $socio->nombre = $_POST['nombre'];
+        $socio->apellidos = $_POST['apellidos'];
+        $socio->poblacion = $_POST['poblacion'];
 
         // Guardar el socio en la base de datos
-
         try {
             //code...
             $socio->save();
 
-            // Session::flash('success', "socio $socio->titulo creado correctamente");
+            Session::flash('success', "socio $socio->nombre creado correctamente");
             // Redireccionar a la lista de socios
-            // redirect("/socio/show/$socio->id");
+            redirect("/socio/show/$socio->id");
         } catch (SQLException $ex) {
             //throw $th;
             Session::flash('error', 'No se pudo crear el socio');
@@ -194,12 +209,12 @@ class SocioController extends Controller
         try {
             //code...
             $socio->deleteObject();
-            Session::flash('success', "socio $socio->titulo borrado correctamente");
+            Session::flash('success', "socio $socio->nombre $socio->apellidos borrado correctamente");
             // Redireccionar a la lista de socios
             redirect('/socio');
         } catch (\Throwable $th) {
             //throw $th;
-            Session::flash('error', "No se pudo borrar el socio $socio->titulo");
+            Session::flash('error', "No se pudo borrar el socio $socio->nombre $socio->apellidos");
 
             // Si estamos en modo debug, iremos a la página de error
             if (DEBUG) {

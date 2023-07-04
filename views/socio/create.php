@@ -20,8 +20,11 @@
 
         <!-- Formulario para creación de libro -->
 
-        <form class="form" method="POST" action="/Libro/store">
+        <form class="form" method="POST" action="/Socio/store">
             <!-- DNI -->
+
+            <!-- <input type="number" name="id" hidden> -->
+
             <div class="mb-3">
                 <label for="dni" class="form-label">DNI</label>
                 <input type="text" name="dni" id="dni" class="form-control" placeholder="Introduce el DNI" required>
@@ -42,7 +45,7 @@
                 <input type="text" name="poblacion" id="poblacion" class="form-control" placeholder="Introduce la población" required>
             </div>
             <!-- Botón de envío -->
-            <input type="submit" value="Crear Libro" class="button" name="Guardar">
+            <input type="submit" value="Crear Socio" class="button" name="Guardar">
         </form>
 
 
