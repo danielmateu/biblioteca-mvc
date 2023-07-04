@@ -16,8 +16,8 @@
     <?= (TEMPLATE)::getError() ?>
 
     <main>
-        <h1><?= APP_NAME ?></h1>
-        <h2>Lista de libros</h2>
+        <!-- <h1><?= APP_NAME ?></h1>
+        <h2>Lista de libros</h2> -->
         <!-- Tabla que muestra los libros -->
 
         <table>
