@@ -3,26 +3,18 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Portada - <?= APP_NAME ?></title>
-
-	<!-- META -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Portada en <?= APP_NAME ?>">
-	<meta name="author" content="Robert Sallent">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-	<!-- FAVICON -->
-	<link rel="shortcut icon" href="favicon.ico" type="image/png">
-
-	<!-- CSS -->
-	<?= (TEMPLATE)::getCss() ?>
+	<title><?= APP_NAME ?></title>
+	<link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body class="p-4">
-	<?= (TEMPLATE)::getLogin() ?>
-	<?= (TEMPLATE)::getHeader('Portada') ?>
-	<?= (TEMPLATE)::getMenu() ?>
-	<?= (TEMPLATE)::getFlashes() ?>
+<body>
+	<?= Template::getLogin() ?>
+	<?= Template::getHeader('Lista de libros') ?>
+	<?= Template::getMenu() ?>
+	<?= Template::getSuccess() ?>
+	<?= Template::getError() ?>
+
 
 	<main>
 		<h1><?= APP_NAME ?></h1>
@@ -86,7 +78,8 @@
 			estructura para de tabla users y algunos usuarios de ejemplo.</p>
 
 	</main>
-	<?= (TEMPLATE)::getFooter() ?>
+
+	<?= Template::getFooter() ?>
 </body>
 
 </html>
