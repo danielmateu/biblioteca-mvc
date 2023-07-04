@@ -20,53 +20,54 @@
 
         <!-- Formulario para creación de libro -->
 
-        <form class="form">
+        <form class="form" method="POST" action="/Libro/store">
             <!-- <h2>Creación de Libros</h2> -->
             <div class="mb-3">
                 <label for="isbn" class="form-label">ISBN</label>
                 <input type="text" name="isbn" id="isbn" class="form-control" placeholder="Introduce el ISBN" required>
             </div>
+            <!-- Titulo -->
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Introduce el nombre" required>
             </div>
+            <!-- Editorial -->
             <div class="mb-3">
                 <label for="editorial" class="form-label">Editorial</label>
                 <input type="text" name="editorial" id="editorial" placeholder="Introduce la editorial" class="form-control" required>
+            </div>
+            <!-- Autor -->
+            <div class="mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <input type="text" name="autor" id="autor" class="form-control" placeholder="Introduce el autor" required>
             </div>
             <!-- Idioma -->
             <div class="mb-3">
                 <label for="idioma" class="form-label">Idioma</label>
                 <select name="idioma" id="idioma" class="form-select" required>
-                    <option value="es">Castellano</option>
-                    <option value="en">Inglés</option>
-                    <option value="fr">Francés</option>
-                    <option value="it">Italiano</option>
-                    <option value="de">Alemán</option>
+                    <option value="Castellano">Castellano</option>
+                    <option value="Català">Català</option>
+                    <option value="Otros">Otros</option>
                 </select>
-            </div>
-            <div class="mb-3">
-                <label for="autor" class="form-label">Autor</label>
-                <input type="text" name="autor" id="autor" class="form-control" placeholder="Introduce el autor" required>
             </div>
             <!-- Ediciones -->
             <div class="mb-3">
-                <label for="edicion" class="form-label">Edición</label>
-                <input type="number" name="edicion" id="edicion" class="form-control" required placeholder="número de edición">
+                <label for="ediciones" class="form-label">Edición</label>
+                <input type="number" name="ediciones" id="ediciones" class="form-control" required placeholder="número de edición">
             </div>
 
             <!-- Edad recomendada -->
             <div class="mb-3">
                 <label for="edad_recomendada" class="form-label">Edad recomendada</label>
-                <input type="number" name="edad_recomendada" id="edad_recomendada" class="form-control" min=0 required placeholder="Edad recomendada">
+                <input type="number" name="edadrecomendada" id="edadrecomendada" class="form-control" min=0 required placeholder="Edad recomendada">
             </div>
 
             <!-- Portada -->
             <div class="mb-3">
                 <label for="portada" class="form-label">Portada</label>
-                <input type="file" name="portada" id="portada" class="form-control" required>
+                <input type="file" name="portada" id="portada" class="form-control">
             </div>
-            <input type="submit" value="Crear" class="btn btn-primary">
+            <input type="submit" value="Crear Libro" class="button" name="Guardar">
         </form>
 
 

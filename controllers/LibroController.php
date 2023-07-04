@@ -2,6 +2,8 @@
 
 class LibroController extends Controller
 {
+    // Metodos
+
     // Operacion por defecto
     public function index()
     {
@@ -20,7 +22,7 @@ class LibroController extends Controller
     {
         // Comprobar que revcibimos el id del libro por parámetro   
         if (!$id) {
-            throw new Exception("No se indicó el libro");
+            throw new NotFoundException("No se indicó el libro");
         }
 
         // Recupera el libro con el id especificado
@@ -40,5 +42,49 @@ class LibroController extends Controller
     {
         // Carga la vista para crear un libro
         $this->loadView('libro/create');
+    }
+
+    // Metodo store(): Procesa los datos del formulario de creación de un libro
+    public function store()
+    {
+        // Comprobar que llegan los datos por POST
+        if (empty($_POST)) {
+            throw new Exception('No se recibieron datos');
+        }
+
+        // Crear el libro
+        $libro = new Libro();
+
+        // Recuperar los datos recibidos por POST
+        // $libro->id = $_POST['id'];
+        $libro->isbn = $_POST['isbn'];
+        $libro->titulo = $_POST['titulo'];
+        $libro->editorial = $_POST['editorial'];
+        $libro->autor = $_POST['autor'];
+        $libro->idioma = $_POST['idioma'];
+        $libro->ediciones = intval($_POST['ediciones']);
+        $libro->edadrecomendada = intval($_POST['edadrecomendada']);
+
+        // Guardar el libro en la base de datos
+
+        try {
+            //code...
+            $libro->save();
+
+            Session::flash('success', "Libro $libro->titulo creado correctamente");
+            // Redireccionar a la lista de libros
+            redirect("/Libro/show/$libro->id");
+        } catch (SQLException $ex) {
+            //throw $th;
+            Session::flash('error', 'No se pudo crear el libro');
+
+            // Si estamos en modo debug, iremos a la página de error
+            if (DEBUG) {
+                throw new Exception($ex->getMessage());
+            } else {
+                // Si no estamos en modo debug, redireccionamos al formulario de creación
+                redirect('/Libro/create');
+            }
+        }
     }
 }

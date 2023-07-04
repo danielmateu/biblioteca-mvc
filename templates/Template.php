@@ -105,7 +105,7 @@ class Template implements TemplateInterface
         if (Login::isAdmin() && (DB_ERRORS || LOG_ERRORS || LOG_LOGIN_ERRORS))
             $html .=   "<li><a href='/Error/list'>Errores</a></li>";
 
-        $html .=   "<li><a href='/Libro/list'>Libros</a></li>";
+        $html .=   "<li><a href='/Libro'>Libros</a></li>";
         $html .=   "<li><a href='/Libro/create'>Crear Libro</a></li>";
         $html .= "</ul>";
 

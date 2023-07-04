@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME ?></title>
-    <link rel="stylesheet" href="/css/style.css">
+    <?= (TEMPLATE)::getCss() ?>
 </head>
 
 <body>
-    <?= Template::getLogin() ?>
-    <?= Template::getHeader('Lista de libros') ?>
-    <?= Template::getMenu() ?>
-    <?= Template::getSuccess() ?>
-    <?= Template::getError() ?>
+    <?= (TEMPLATE)::getLogin() ?>
+    <?= (TEMPLATE)::getHeader('Lista de libros') ?>
+    <?= (TEMPLATE)::getMenu() ?>
+    <?= (TEMPLATE)::getSuccess() ?>
+    <?= (TEMPLATE)::getError() ?>
 
     <main>
         <h1><?= APP_NAME ?></h1>
