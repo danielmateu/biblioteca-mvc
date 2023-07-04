@@ -11,9 +11,7 @@
 
 <body>
     <?= Template::getLogin() ?>
-    <?=
-    Template::getHeader("Eliminando: $socio->nombre $socio->apellidos")
-    ?>
+    <?= Template::getHeader("Eliminando: $socio->nombre $socio->apellidos") ?>
     <?= Template::getMenu() ?>
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>

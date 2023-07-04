@@ -110,6 +110,9 @@ class Template implements TemplateInterface
         $html .=   "<li><a href='/Socio'>Socios</a></li>";
         $html .=   "<li><a href='/Socio/create'>Crear Socio</a></li>";
 
+        $html .=   "<li><a href='/Tema'>Temas</a></li>";
+        $html .=   "<li><a href='/Tema/create'>Crear Tema</a></li>";
+
         // if (Login::isAdmin() && (DB_ERRORS || LOG_ERRORS || LOG_LOGIN_ERRORS))
         //     $html .=   "<li><a href='/Error/list'>Errores</a></li>";
         $html .= "</ul>";
@@ -140,8 +143,6 @@ class Template implements TemplateInterface
         $html .= "</nav>";
         return $html;
     }
-
-
 
 
     /*****************************************************************************

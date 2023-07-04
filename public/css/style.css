@@ -309,6 +309,7 @@ textarea {
 .button,
 a {
 	font-size: 1rem;
+	text-decoration: none;
 }
 
 .button {
@@ -351,6 +352,7 @@ a {
 	background-color: white;
 	color: #99a;
 }
+
 
 /* tablas */
 table {

@@ -18,21 +18,21 @@
     <main>
         <table>
             <tr>
-                <th>DNI</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
+                <th>ID</th>
+                <th>Tema</th>
+                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
 
-            <?php foreach ($socios as $socio) : ?>
+            <?php foreach ($temas as $tema) : ?>
                 <tr>
-                    <td><?= $socio->dni ?></td>
-                    <td><?= $socio->nombre ?></td>
-                    <td><?= $socio->apellidos ?></td>
+                    <td><?= $tema->id ?></td>
+                    <td><?= $tema->tema ?></td>
+                    <td><?= $tema->descripcion ?></td>
                     <td class="acciones">
-                        <a href="/socio/show/<?= $socio->id ?>"><span>🔎</span></a>
-                        <a href="/socio/edit/<?= $socio->id ?>"><span>✏️</span></a>
-                        <a href="/socio/delete/<?= $socio->id ?>"><span>🗑️</span></a>
+                        <a href="/tema/show/<?= $tema->id ?>"><span>🔎</span></a>
+                        <a href="/tema/edit/<?= $tema->id ?>"><span>✏️</span></a>
+                        <a href="/tema/delete/<?= $tema->id ?>"><span>🗑️</span></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
