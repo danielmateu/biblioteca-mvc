@@ -52,20 +52,6 @@ class SocioController extends Controller
             throw new Exception('No se recibieron datos');
         }
 
-        // Comprobar si hay un DNI igual en la base de datos
-        // if (socio::find($_POST['id'])) {
-        //     Session::flash('error', 'Ya existe un socio con ese DNI');
-        //     redirect('/socio/create');
-
-        //     // Si estamos en modo debug, iremos a la página de error
-        //     if (DEBUG) {
-        //         throw new Exception('Ya existe un socio con ese DNI');
-        //     } else {
-        //         // Si no estamos en modo debug, redireccionamos al formulario de creación
-        //         redirect('/socio/create');
-        //     }
-        // }
-
         // Crear el socio
         $socio = new socio();
 
