@@ -11,13 +11,17 @@
 
 <body>
     <?= Template::getLogin() ?>
-    <?= Template::getHeader('Lista de libros') ?>
+    <?php
+    // Titulo acortado
+    $tituloAcortado = shorten($libro->titulo, 15);
+    ?>
+    <?= Template::getHeader("Libro: $tituloAcortado") ?>
     <?= Template::getMenu() ?>
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
 
     <main>
-        <h1><?= APP_NAME ?></h1>
+        <!-- <h1><?= APP_NAME ?></h1> -->
 
         <h2>
             <?= $libro->titulo ?>
