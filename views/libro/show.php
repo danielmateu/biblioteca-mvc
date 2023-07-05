@@ -13,7 +13,7 @@
 <body>
 
     <?= Template::getMenuBootstrap() ?>
-    <?= Template::getHeaderAlt('Edición de libro') ?>
+    <?= Template::getHeaderAlt("Detalles de $libro->titulo") ?>
 
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
@@ -28,33 +28,33 @@
             <p>
                 <strong>Autor:</strong>
                 <?= $libro->autor ?>
-
                 <br>
-
                 <strong>Editorial:</strong>
-
                 <?= $libro->editorial ?>
-
                 <br>
-
                 <strong>ISBN:</strong>
-
                 <?= $libro->isbn ?>
-
                 <br>
-
                 <strong>Edad recomendada:</strong>
-
                 <?= " $libro->edadrecomendada años" ?>
             </p>
         </div>
 
-        <!-- Botones para volver, editar y borrar -->
-        <!-- <div>
-            <a class="button" href="/Libro">Volver</a>
-            <a class="button" href="/Libro/edit/<?= $libro->id ?>">Editar</a>
-            <a class="button" href="/Libro/delete/<?= $libro->id ?>">Borrar</a>
-        </div> -->
+        <!-- Mostramos los ejemplares-->
+        <div>
+            <h3>Ejemplares</h3>
+            <ul>
+                <?php foreach ($ejemplares as $ejemplar) : ?>
+                    <li>
+                        <?= "<strong>Año de edición</strong>: $ejemplar->anyo, " ?>
+                        <?= "<strong>Ediciones</strong>: $ejemplar->edicion, " ?>
+                        <?= "<strong>Estado</strong>: $ejemplar->estado, " ?>
+                        <?= "<strong>Características</strong>: $ejemplar->caracteristicas" ?>
+                    </li>
+                <?php endforeach ?>
+            </ul>
+
+        </div>
 
         <!-- Botones para volver, editar y borrar -->
         <div class="d-flex justify-content-center gap-2">

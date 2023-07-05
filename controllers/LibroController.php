@@ -33,8 +33,14 @@ class LibroController extends Controller
             throw new Exception("No se encontró el libro $id");
         }
 
-        // Carga la vista para mostrar detalles de un libro
-        $this->loadView('libro/show', ['libro' => $libro]);
+        // Obtenemos los ejemplares del libro
+        $ejemplares = $libro->hasMany('Ejemplar');
+
+        // Carga la vista para mostrar detalles y ejemplares de un libro
+        $this->loadView('libro/show', [
+            'libro' => $libro,
+            'ejemplares' => $ejemplares
+        ]);
     }
 
     // Metodo create(): Muestra el formulario para crear un libro
