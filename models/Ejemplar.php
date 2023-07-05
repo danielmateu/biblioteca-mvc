@@ -2,12 +2,12 @@
 class Ejemplar extends Model
 {
     // Propiedades
-    public $id = 0;
-    public $anyo = '';
-    public $ediciones = '';
-    public $estado = '';
-    public $caracteristicas = '';
-    public $idlibro = 0;
+    public int $idlibro = 0;
+    public int $anyo = 0;
+    public string $edicion = '';
+    public float $precio = 0;
+    public string $estado = '';
+    public string $caracteristicas = '';
 
     protected static string $table = 'ejemplares';
 }

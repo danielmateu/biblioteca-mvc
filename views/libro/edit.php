@@ -21,10 +21,7 @@
 
     <main class="">
 
-        <!-- Boton para crear nuevo ejemplar -->
-        <div class="d-flex justify-content-center gap-2">
-            <a class="btn btn-primary" href="/ejemplar/create/<?= $libro->id ?>">Nuevo Ejemplar</a>
-        </div>
+
 
         <!-- Formulario para edicion de libro -->
 
@@ -100,6 +97,12 @@
             }
 
             ?>
+
+            <!-- Boton para crear nuevo ejemplar -->
+            <div class="d-flex mb-4">
+                <a class="btn btn-outline-success" href="/ejemplar/create/<?= $libro->id ?>">Nuevo Ejemplar</a>
+            </div>
+
         </div>
 
         <!-- Botón que nos redirija a la lista de libros -->
