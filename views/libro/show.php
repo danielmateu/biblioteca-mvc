@@ -43,16 +43,22 @@
         <!-- Mostramos los ejemplares-->
         <div>
             <h3>Ejemplares</h3>
-            <ul>
-                <?php foreach ($ejemplares as $ejemplar) : ?>
-                    <li>
-                        <?= "<strong>Año de edición</strong>: $ejemplar->anyo, " ?>
-                        <?= "<strong>Ediciones</strong>: $ejemplar->edicion, " ?>
-                        <?= "<strong>Estado</strong>: $ejemplar->estado, " ?>
-                        <?= "<strong>Características</strong>: $ejemplar->caracteristicas" ?>
-                    </li>
-                <?php endforeach ?>
-            </ul>
+
+            <!-- Si hay ejemplares, mostrarlos -->
+            <?php
+            if (!empty($ejemplares)) {
+
+                // Mostrar los ejemplares
+                foreach ($ejemplares as $ejemplar) {
+                    echo "<p><strong>Id</strong>: $ejemplar->id, <strong>Id Libro</strong>: $ejemplar->idlibro - <strong>Año de edición</strong>: $ejemplar->anyo, $ejemplar->estado, $ejemplar->caracteristicas. <strong>Precio</strong>: $ejemplar->precio €</p>";
+                }
+            } else {
+                // Si no hay ejemplares, mostrar un mensaje
+                echo "<p class='alert alert-danger'>No hay ejemplares</p>";
+            }
+
+            ?>
+
 
         </div>
 

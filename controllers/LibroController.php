@@ -110,8 +110,15 @@ class LibroController extends Controller
             throw new Exception("No se encontró el libro $id");
         }
 
+        // Obtenemos los ejemplares del libro
+        $ejemplares = $libro->hasMany('Ejemplar');
+
         // Carga la vista para editar un libro
-        $this->loadView('libro/edit', ['libro' => $libro]);
+        $this->loadView('libro/edit', [
+            'libro' => $libro,
+            'ejemplares' => $ejemplares
+
+        ]);
     }
 
     // Metodo update(): Procesa los datos del formulario de edición de un libro
