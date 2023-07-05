@@ -92,6 +92,17 @@ class Template implements TemplateInterface
         ";
     }
 
+    public static function getHeaderAlt(string $titulo = '')
+    {
+        $name = APP_NAME;
+
+        return "
+            <header class='primary'>
+                <h1>$titulo en $name</h1>
+            </header>
+        ";
+    }
+
 
     /*****************************************************************************
      * MENÚ
@@ -119,6 +130,43 @@ class Template implements TemplateInterface
 
         return $html;
     }
+
+    public static function getMenuBootstrap()
+    {
+        $html = "<nav class='px-4 navbar navbar-expand navbar-light bg-light align-items-center justify-content-between'>";
+
+        $html .= "<a class='navbar-brand' href='/'>Biblioteca</a>";
+
+        $html .= "<div class='collapse navbar-collapse' id='navbarSupportedContent'>";
+
+        $html .= "<ul class='navbar-nav mr-auto'>";
+
+        $html .= "<li class='nav-item'><a href='/Libro' class='nav-link'>Libros</a></li>";
+
+        $html .= "<li class='nav-item'><a href='/Socio' class='nav-link'>Socios</a></li>";
+
+        $html .= "<li class='nav-item'><a href='/Tema' class='nav-link'>Temas</a></li>";
+
+        $html .= "</ul>";
+
+        $html .= "</div>";
+
+        // Si estamos logueados mostramos el nombre del usuario y el botón de logout
+        if (Login::check()) {
+            $user = Login::user();
+            $html .= "<div class='nav-item'>$user->displayname</div>";
+            $html .= "<div class='nav-item'><a href='/Logout' class='nav-link'>Logout</a></div>";
+        } else {
+            $html .= "<div class='nav-item'><a href='/Login' class='nav-link'>Login</a></div>";
+        }
+
+
+        $html .= "</nav>";
+
+        return $html;
+    }
+
+
 
     /*****************************************************************************
      * MIGAS
@@ -279,6 +327,19 @@ EOT : '';
                     <img src='/images/template/github.png' alt='GitHub'>
                 </a>
             </p>
+        </footer>";
+    }
+
+    // retorna el footer de la página de login alternativo
+    public static function getAltFooter()
+    {
+        return "
+        <footer class='p-2 mt-5 border-top text-center'>
+        &copy;
+        <?= date('Y') ?>
+        - Desarrollo Web en Entorno Servidor por <a
+        target='_blank'
+        href='https://daniel-mateu-portfolio.vercel.app/' >Daniel Mateu</a>
         </footer>";
     }
 }

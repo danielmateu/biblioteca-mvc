@@ -4,19 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= APP_NAME ?></title>
+    <title><?= APP_NAME ?> - Lista de socios</title>
     <?= (TEMPLATE)::getCss() ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-    <?= (TEMPLATE)::getLogin() ?>
-    <?= (TEMPLATE)::getHeader('Lista de socios') ?>
-    <?= (TEMPLATE)::getMenu() ?>
+
+    <?= (TEMPLATE)::getMenuBootstrap() ?>
+    <?= (TEMPLATE)::getHeaderAlt('Lista de socios') ?>
     <?= (TEMPLATE)::getSuccess() ?>
     <?= (TEMPLATE)::getError() ?>
 
     <main>
-        <table>
+
+        <a href="/Socio/create" class="btn btn-outline-primary ">Crear Socio</a>
+
+        <table class="table table-dark  table-striped table-hover rounded-3">
             <tr>
                 <th>DNI</th>
                 <th>Nombre</th>
@@ -39,9 +43,16 @@
 
         </table>
 
+        <div class="d-flex justify-content-center gap-2">
+            <!-- Botones para volver, editar y borrar -->
+            <a class="btn btn-primary" href="/socio">Volver</a>
+            <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a> -->
+            <!-- <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a> -->
+        </div>
+
     </main>
 
-    <?= Template::getFooter() ?>
+    <?= Template::getAltFooter() ?>
 </body>
 
 </html>

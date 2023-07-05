@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= APP_NAME ?> - edición</title>
+    <title><?= APP_NAME ?> - Detalle Libro</title>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <?= Template::getCss() ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-    <?= Template::getLogin() ?>
-    <?= Template::getHeader('Edición de libro') ?>
-    <?= Template::getMenu() ?>
+
+    <?= Template::getMenuBootstrap() ?>
+    <?= Template::getHeaderAlt('Edición de libro') ?>
+
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
 
@@ -47,20 +49,24 @@
             </p>
         </div>
 
-        <div>
-            <!-- Botones para volver, editar y borrar -->
+        <!-- Botones para volver, editar y borrar -->
+        <!-- <div>
             <a class="button" href="/Libro">Volver</a>
             <a class="button" href="/Libro/edit/<?= $libro->id ?>">Editar</a>
             <a class="button" href="/Libro/delete/<?= $libro->id ?>">Borrar</a>
+        </div> -->
+
+        <!-- Botones para volver, editar y borrar -->
+        <div class="d-flex justify-content-center gap-2">
+            <a class="btn btn-primary" href="/libro">Volver</a>
+            <a class="btn btn-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
+            <a class="btn btn-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a>
         </div>
-
-
-
 
 
     </main>
 
-    <?= Template::getFooter() ?>
+    <?= Template::getAltFooter() ?>
 </body>
 
 </html>

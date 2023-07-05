@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= APP_NAME ?></title>
+    <title><?= APP_NAME ?> - Detalle Socio</title>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <?= Template::getCss() ?>
 </head>
 
 <body>
-    <?= Template::getLogin() ?>
-    <?= Template::getHeader("Socio: $socio->nombre $socio->apellidos") ?>
-    <?= Template::getMenu() ?>
+
+    <?= Template::getMenuBootstrap() ?>
+    <?= Template::getHeaderAlt("Socio: $socio->nombre $socio->apellidos") ?>
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
 
@@ -43,16 +43,16 @@
 
         </div>
 
-        <div>
+        <div class="d-flex justify-content-center gap-2">
             <!-- Botones para volver, editar y borrar -->
-            <a class="button" href="/Socio">Volver</a>
-            <a class="button" href="/Socio/edit/<?= $socio->id ?>">Editar</a>
-            <a class="button" href="/Socio/delete/<?= $socio->id ?>">Borrar</a>
+            <a class="btn btn-primary" href="/socio">Volver</a>
+            <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a>
+            <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a>
         </div>
 
     </main>
 
-    <?= Template::getFooter() ?>
+    <?= Template::getAltFooter() ?>
 </body>
 
 </html>

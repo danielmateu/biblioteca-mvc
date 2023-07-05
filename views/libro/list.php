@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME ?> - Lista de libros</title>
     <?= (TEMPLATE)::getCss() ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <?= (TEMPLATE)::getLogin() ?>
-    <?= (TEMPLATE)::getHeader('Lista de libros') ?>
-    <?= (TEMPLATE)::getMenu() ?>
+    <?= Template::getMenuBootstrap() ?>
+    <?= (TEMPLATE)::getHeaderAlt('Lista de libros') ?>
+
     <?= (TEMPLATE)::getSuccess() ?>
     <?= (TEMPLATE)::getError() ?>
 
@@ -19,15 +21,18 @@
         <!-- <h1><?= APP_NAME ?></h1>
         <h2>Lista de libros</h2> -->
         <!-- Tabla que muestra los libros -->
+        <a href="/Libro/create" class="btn btn-outline-primary">Crear Libro</a>
 
-        <table>
-            <tr>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Editorial</th>
-                <th>ISBN</th>
-                <th>Acciones</th>
-            </tr>
+        <table class="table table-dark  table-striped table-hover rounded-3">
+            <thead>
+                <tr>
+                    <th scope="col" class="">Título</th>
+                    <th scope="col" class="">Autor</th>
+                    <th scope="col" class="">Editorial</th>
+                    <th scope="col" class="">ISBN</th>
+                    <th scope="col" class="">Acciones</th>
+                </tr>
+            </thead>
 
             <?php foreach ($libros as $libro) : ?>
                 <tr>
@@ -35,19 +40,28 @@
                     <td><?= $libro->autor ?></td>
                     <td><?= $libro->editorial ?></td>
                     <td><?= $libro->isbn ?></td>
-                    <td>
-                        <a href="/Libro/show/<?= $libro->id ?>">Ver</a>
-                        <a href="/Libro/edit/<?= $libro->id ?>">Editar</a>
-                        <a href="/Libro/delete/<?= $libro->id ?>">Borrar</a>
+                    <td class="">
+                        <a class="" href="/Libro/show/<?= $libro->id ?>">🔎</a>
+                        <a class="" href="/Libro/edit/<?= $libro->id ?>">✏️</a>
+                        <a class="" href="/Libro/delete/<?= $libro->id ?>">🗑️</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
 
         </table>
 
+        <div class="d-flex justify-content-center gap-2">
+            <!-- Botones para volver, editar y borrar -->
+            <a class="btn btn-outline-primary" href="/libro">Volver</a>
+            <!-- <a class="btn btn-outline-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
+            <a class="btn btn-outline-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a> -->
+        </div>
+
     </main>
 
-    <?= Template::getFooter() ?>
+    <?= Template::getAltFooter() ?>
+    <!-- Scrip de JS para bootstrap -->
+
 </body>
 
 </html>

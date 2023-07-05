@@ -18,9 +18,8 @@
 </head>
 
 <body>
-	<?= (TEMPLATE)::getLogin() ?>
-	<?= (TEMPLATE)::getHeader('Éxito') ?>
-	<?= (TEMPLATE)::getMenu() ?>
+	<?= (TEMPLATE)::getMenuBootstrap() ?>
+	<?= (TEMPLATE)::getHeaderAlt('Éxito') ?>
 	<?= (TEMPLATE)::getBreadCrumbs(["Éxito" => NULL]) ?>
 	<?= (TEMPLATE)::getFlashes() ?>
 

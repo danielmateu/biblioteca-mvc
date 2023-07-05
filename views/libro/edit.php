@@ -1,7 +1,3 @@
-<?=
-$tituloTitle = shorten($libro->titulo, 15);
-$tituloAcortado = shorten($libro->titulo, 25);
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,20 +6,25 @@ $tituloAcortado = shorten($libro->titulo, 25);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME ?> - Edición Libro</title>
     <link rel="stylesheet" href="/css/style.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 
 <body>
-    <?= Template::getLogin() ?>
+
     <!-- Use de la funcion shorten para acortar la longitud del titulo -->
+    <?= Template::getMenuBootstrap() ?>
     <?=
-    Template::getHeader("Editando: $tituloAcortado")
+    Template::getHeaderAlt("Editando: $libro->titulo")
     ?>
-    <?= Template::getMenu() ?>
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
 
     <main class="">
+
+        <!-- Boton para crear nuevo ejemplar -->
+        <div class="d-flex justify-content-center gap-2">
+            <a class="btn btn-primary" href="/ejemplar/create/<?= $libro->id ?>">Nuevo Ejemplar</a>
+        </div>
 
         <!-- Formulario para edicion de libro -->
 
@@ -82,11 +83,16 @@ $tituloAcortado = shorten($libro->titulo, 25);
         </form>
 
         <!-- Botón que nos redirija a la lista de libros -->
-
+        <div class="d-flex justify-content-center gap-2">
+            <!-- Botones para volver, editar y borrar -->
+            <a class="btn btn-primary" href="/libro">Volver</a>
+            <!-- <a class="btn btn-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a> -->
+            <a class="btn btn-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a>
+        </div>
 
     </main>
 
-    <?= Template::getFooter() ?>
+    <?= Template::getAltFooter() ?>
 </body>
 
 </html>

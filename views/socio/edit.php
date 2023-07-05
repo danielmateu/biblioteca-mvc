@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <?= Template::getLogin() ?>
+
     <!-- Use de la funcion shorten para acortar la longitud del titulo -->
+    <?= Template::getMenuBootstrap() ?>
     <?=
-    Template::getHeader("Editando: $socio->nombre $socio->apellidos")
+    Template::getHeaderAlt("Editando: $socio->nombre $socio->apellidos")
     ?>
-    <?= Template::getMenu() ?>
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
 
@@ -58,17 +58,17 @@
 
 
         <!-- Botón que nos redirija a la lista de libros -->
-        <div>
+        <div class="d-flex justify-content-center gap-2">
             <!-- Botones para volver, editar y borrar -->
-            <a class="button" href="/Socio">Volver</a>
-            <!-- <a class="button" href="/Socio/edit/<?= $Socio->id ?>">Editar</a> -->
-            <!-- <a class="button" href="/Socio/delete/<?= $Socio->id ?>">Borrar</a> -->
+            <a class="btn btn-primary" href="/socio">Volver</a>
+            <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a> -->
+            <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a>
         </div>
 
 
     </main>
 
-    <?= Template::getFooter() ?>
+    <?= Template::getAltFooter() ?>
 </body>
 
 </html>
