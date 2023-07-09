@@ -113,8 +113,6 @@ class Template implements TemplateInterface
         $html  = "<ul class='navBar'>";
         $html .=   "<li><a href='/'>Inicio</a></li>";
 
-
-
         $html .=   "<li><a href='/Libro'>Libros</a></li>";
         $html .=   "<li><a href='/Libro/create'>Crear Libro</a></li>";
 
@@ -123,6 +121,8 @@ class Template implements TemplateInterface
 
         $html .=   "<li><a href='/Tema'>Temas</a></li>";
         $html .=   "<li><a href='/Tema/create'>Crear Tema</a></li>";
+
+        $html .=   "<li><a href='/Contacto'>Contacto</a></li>";
 
         // if (Login::isAdmin() && (DB_ERRORS || LOG_ERRORS || LOG_LOGIN_ERRORS))
         //     $html .=   "<li><a href='/Error/list'>Errores</a></li>";
@@ -146,6 +146,8 @@ class Template implements TemplateInterface
         $html .= "<li class='nav-item'><a href='/Socio' class='nav-link'>Socios</a></li>";
 
         $html .= "<li class='nav-item'><a href='/Tema' class='nav-link'>Temas</a></li>";
+
+        $html .= "<li class='nav-item'><a href='/Contacto' class='nav-link'>Contacto</a></li>";
 
         $html .= "</ul>";
 

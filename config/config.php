@@ -33,6 +33,9 @@ define('AUTOLOAD_DIRECTORIES',  [
 define('APP_NAME', 'biblioteca'); // Título de la aplicación.
 define('APP_TYPE', 'WEB');                // Tipo de aplicación: WEB o API.
 
+// Email del administrador
+define('ADMIN_EMAIL', 'danielmateu86@gmail.com');
+
 // Controlador y método por defecto (solamente para APP_TYPE WEB).
 define('DEFAULT_CONTROLLER', 'WelcomeController');
 define('DEFAULT_METHOD', 'index');
