@@ -62,11 +62,19 @@
                 <input type="number" name="edadrecomendada" id="edadrecomendada" class="form-control" min=0 required placeholder="Edad recomendada">
             </div>
 
-            <!-- Portada -->
-            <!-- <div class="mb-3">
-                <label for="portada" class="form-label">Portada</label>
-                <input type="file" name="portada" id="portada" class="form-control">
-            </div> -->
+            <!-- Tema Principal -->
+            <div class="mb-3">
+                <label for="tema_principal" class="form-label">Tema principal</label>
+                <select name="idtema" id="">
+                    <?php foreach ($listaTemas as $nuevoTema) : ?>
+                        <option value="<?= $nuevoTema->id ?>"><?= $nuevoTema->tema ?></option>
+                    <?php endforeach; ?>
+                </select>
+
+                <p>Puedes añadir más temas desde la opción de edición</p>
+            </div>
+
+
             <input type="submit" value="Crear Libro" class="button" name="Guardar">
         </form>
 

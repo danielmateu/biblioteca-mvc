@@ -77,8 +77,44 @@
             <input type="submit" value="Editar Libro" class="button" name="actualizar" value="Actualizar">
         </form>
 
+        <!-- Mostramos los temas -->
+        <section>
+            <h3>Temas tratados</h3>
+            <!-- Si hay temas, mostrarlos -->
+            <?php
+            if (!empty($temas)) {
+
+                // Mostrar los temas
+                foreach ($temas as $tema) {
+                    echo "<li> $tema->tema</li>";
+                }
+            } else {
+                // Si no hay temas, mostrar un mensaje
+                echo "<p class='alert alert-danger'>No hay temas</p>";
+            }
+
+            ?>
+
+            <form action="/Libro/addtema" method='POST'>
+                <input type="hidden" name='idlibro' value="<?= $libro->id ?>">
+
+                <div class="d-flex align-items-center gap-2">
+                    <select name="idtema" id="">
+                        <?php
+                        foreach ($listaTemas as $nuevoTema) {
+                            echo "<option value='$nuevoTema->id'>$nuevoTema->tema</option>";
+                        }
+                        ?>
+                    </select>
+                    <input type="submit" value="Añadir tema" class="btn btn-outline-secondary" name="add">
+                </div>
+
+            </form>
+
+        </section>
+
         <!-- Mostramos los ejemplares-->
-        <div>
+        <section>
             <h3>Ejemplares</h3>
 
             <!-- Si hay ejemplares, mostrarlos -->
@@ -88,16 +124,14 @@
                 // Mostrar los ejemplares
                 foreach ($ejemplares as $ejemplar) {
 
-                    echo "<li class='d-flex align-items-center  gap-2'>$ejemplar";
+                    echo "<li class='d-flex align-items-center list-group-item list-group-item-action list-group-item-secondary justify-content-between p-2 my-1'>$ejemplar->anyo - $ejemplar->estado - $ejemplar->caracteristicas - $ejemplar->precio €";
 
                     // Si el ejemplar no tiene prestamos, mostrar el botón de borrar
+
                     if (!$ejemplar->hasMany('Prestamo')) {
-                        echo "<a class='btn btn-outline-danger' href='/Ejemplar/destroy/$ejemplar->id'>Borrar</a>";
+                        echo "<a class='btn btn-outline-danger' href='/Ejemplar/destroy/$ejemplar->id'>Borrar ejemplar</a>";
                     }
-
                     echo "</li>";
-
-                    // echo "<p><strong>Id</strong>: $ejemplar->id, <strong>Id Libro</strong>: $ejemplar->idlibro - <strong>Año de edición</strong>: $ejemplar->anyo, $ejemplar->estado, $ejemplar->caracteristicas. <strong>Precio</strong>: $ejemplar->precio €</p>";
                 }
             } else {
                 // Si no hay ejemplares, mostrar un mensaje
@@ -107,11 +141,11 @@
             ?>
 
             <!-- Boton para crear nuevo ejemplar -->
-            <div class="d-flex mb-4">
+            <div class="d-flex my-4">
                 <a class="btn btn-outline-success" href="/ejemplar/create/<?= $libro->id ?>">Nuevo Ejemplar</a>
             </div>
 
-        </div>
+        </section>
 
         <!-- Botón que nos redirija a la lista de libros -->
         <div class="d-flex justify-content-center gap-2">

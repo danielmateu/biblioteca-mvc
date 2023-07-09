@@ -40,8 +40,27 @@
             </p>
         </div>
 
+        <!-- Mostramos los temas -->
+        <section>
+            <h3>Temas tratados</h3>
+            <!-- Si hay temas, mostrarlos -->
+            <?php
+            if (!empty($temas)) {
+
+                // Mostrar los temas
+                foreach ($temas as $tema) {
+                    echo "<li> $tema->tema</li>";
+                }
+            } else {
+                // Si no hay temas, mostrar un mensaje
+                echo "<p class='alert alert-danger'>No hay temas</p>";
+            }
+
+            ?>
+        </section>
+
         <!-- Mostramos los ejemplares-->
-        <div>
+        <section>
             <h3>Ejemplares</h3>
 
             <!-- Si hay ejemplares, mostrarlos -->
@@ -58,9 +77,7 @@
             }
 
             ?>
-
-
-        </div>
+        </section>
 
         <!-- Botones para volver, editar y borrar -->
         <div class="d-flex justify-content-center gap-2">
