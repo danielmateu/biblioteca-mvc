@@ -35,11 +35,14 @@ class LibroController extends Controller
 
         // Obtenemos los ejemplares del libro
         $ejemplares = $libro->hasMany('Ejemplar');
+        // Obtenemos los temas del libro
+        $temas = $libro->getTemas();
 
         // Carga la vista para mostrar detalles y ejemplares de un libro
         $this->loadView('libro/show', [
             'libro' => $libro,
-            'ejemplares' => $ejemplares
+            'ejemplares' => $ejemplares,
+            'temas' => $temas
         ]);
     }
 
@@ -47,7 +50,10 @@ class LibroController extends Controller
     public function create()
     {
         // Carga la vista para crear un libro
-        $this->loadView('libro/create');
+        // $this->loadView('libro/create');
+        $listaTemas = Tema::orderBy('tema', 'ASC');
+
+        $this->loadView('libro/create', ['listaTemas' => $listaTemas]);
     }
 
     // Metodo store(): Procesa los datos del formulario de creación de un libro
@@ -112,12 +118,20 @@ class LibroController extends Controller
 
         // Obtenemos los ejemplares del libro
         $ejemplares = $libro->hasMany('Ejemplar');
+        // Obtenemos los temas del libro
+        $temas = $libro->getTemas();
+
+        // Todos los temas ordenados por nombre asc
+        $listaTemas = Tema::orderBy('tema', 'ASC');
+        // Temas que no tiene el libro
+        $listaTemas = array_diff($listaTemas, $temas);
 
         // Carga la vista para editar un libro
         $this->loadView('libro/edit', [
             'libro' => $libro,
-            'ejemplares' => $ejemplares
-
+            'ejemplares' => $ejemplares,
+            'temas' => $temas,
+            'listaTemas' => $listaTemas
         ]);
     }
 
@@ -229,6 +243,62 @@ class LibroController extends Controller
             } else {
                 // Si no estamos en modo debug, redireccionamos al formulario de borrado
                 redirect("/Libro/delete/$id");
+            }
+        }
+    }
+
+    // Añade un tema a un libro
+    public function addTema()
+    {
+        // Comprobamos que llegue el formulario de confirmación
+        if (empty($_POST['add'])) {
+            throw new Exception('No se recibieron datos');
+        }
+
+        // Recuperar el id del libro via post
+        $idLibro = intval($_POST['idlibro']);
+        // Recuperar el id del tema via post
+        $idTema = intval($_POST['idtema']);
+        // Recuperamos el libro con el id especificado
+        $libro = Libro::find($idLibro);
+        // Recuperamos el tema con el id especificado
+        $tema = Tema::find($idTema);
+
+        // Si no se indica tema y libro
+        if (!$idLibro || !$idTema) {
+            throw new Exception("No se indicó el libro o el tema");
+        }
+
+        // Si no existe el libro mostramos un error
+        if (!$libro) {
+            throw new Exception("No se encontró el libro $idLibro");
+        }
+
+        // Si no existe el tema mostramos un error
+        if (!$tema) {
+            throw new Exception("No se encontró el tema $idTema");
+        }
+
+        // Recuperamos el tema a partir del id que llega por post
+        $tema = Tema::find(intval($_POST['idtema']));
+
+
+        // Guardar el libro en la base de datos
+        try {
+            //code...
+            $libro->addTema($tema);
+            Session::flash('success', "Tema $tema->tema añadido correctamente al libro $libro->titulo");
+            redirect("/Libro/edit/$idLibro");
+        } catch (SQLException $th) {
+            //throw $th;
+            Session::flash('error', "No se pudo añadir el tema $tema->tema al libro $libro->titulo");
+
+            // Si estamos en modo debug, iremos a la página de error
+            if (DEBUG) {
+                throw new Exception($th->getMessage());
+            } else {
+                // Si no estamos en modo debug, redireccionamos al formulario de borrado
+                redirect("/Libro/edit/$idLibro");
             }
         }
     }
