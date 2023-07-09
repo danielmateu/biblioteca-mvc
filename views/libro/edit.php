@@ -21,8 +21,6 @@
 
     <main class="">
 
-
-
         <!-- Formulario para edicion de libro -->
 
         <form class="form" method="POST" action="/Libro/update">
@@ -89,7 +87,17 @@
 
                 // Mostrar los ejemplares
                 foreach ($ejemplares as $ejemplar) {
-                    echo "<p><strong>Id</strong>: $ejemplar->id, <strong>Id Libro</strong>: $ejemplar->idlibro - <strong>Año de edición</strong>: $ejemplar->anyo, $ejemplar->estado, $ejemplar->caracteristicas. <strong>Precio</strong>: $ejemplar->precio €</p>";
+
+                    echo "<li class='d-flex align-items-center  gap-2'>$ejemplar";
+
+                    // Si el ejemplar no tiene prestamos, mostrar el botón de borrar
+                    if (!$ejemplar->hasMany('Prestamo')) {
+                        echo "<a class='btn btn-outline-danger' href='/Ejemplar/destroy/$ejemplar->id'>Borrar</a>";
+                    }
+
+                    echo "</li>";
+
+                    // echo "<p><strong>Id</strong>: $ejemplar->id, <strong>Id Libro</strong>: $ejemplar->idlibro - <strong>Año de edición</strong>: $ejemplar->anyo, $ejemplar->estado, $ejemplar->caracteristicas. <strong>Precio</strong>: $ejemplar->precio €</p>";
                 }
             } else {
                 // Si no hay ejemplares, mostrar un mensaje

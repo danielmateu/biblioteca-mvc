@@ -72,8 +72,44 @@ class EjemplarController extends Controller
     }
 
     // Método para confirmar el borrado de un ejemplar
-    public function destroy()
+    public function destroy(int $id = 0)
     {
+        // Comprobamos si nos llega el id
+        if (!$id) {
+            throw new Exception('No se ha recibido el id del ejemplar');
+        }
+
+        // Buscamos el ejemplar
+        $ejemplar = Ejemplar::find($id);
+
+        // Si no existe el ejemplar
+        if (!$ejemplar) {
+            throw new NotFoundException("No se ha encontrado el ejemplar con id $id");
+        }
+
+        // Si hay prestamos no permitimos el borrado
+        if ($ejemplar->hasMany('Prestamo', 'idejemplar')) {
+            Session::flash('error', 'No se puede borrar el ejemplar porque tiene préstamos');
+            redirect("/Libro/edit/$ejemplar->idlibro");
+        }
+
+        // Intentamos borrar el ejemplar
+        try {
+            //code...
+            Ejemplar::delete($id);
+            Session::flash('success', 'Ejemplar borrado correctamente');
+            redirect("/Libro/edit/$ejemplar->idlibro");
+        } catch (SQLException $th) {
+            //throw $th;
+            Session::flash('error', 'No se ha podido borrar el ejemplar');
+
+            // Si estamos en modo debug, mostramos el error
+            if (DEBUG) {
+                throw new Exception($th->getMessage());
+            } else {
+                redirect(`/Libro/edit/$ejemplar->idlibro`);
+            }
+        }
     }
 
     // Método para mostrar un ejemplar
