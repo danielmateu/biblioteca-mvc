@@ -66,6 +66,22 @@ class SocioController extends Controller
             //code...
             $socio->save();
 
+            // Si llega el fichero con la foto del socio, la guardamos
+            if (Upload::arrive('foto')) {
+
+                $socio->foto = Upload::save(
+                    'foto', // Nombre del campo file del formulario
+                    '../public/' . SOCIO_IMAGE_FOLDER, // Ruta donde se guardará el fichero
+                    true, // generar nombre único
+                    124000, // Tamaño máximo
+                    'image/*', // Tipo mime permitido
+                    'profile_' // Prefijo para el nombre del fichero
+                );
+
+                // Guardar el socio en la base de datos
+                $socio->update();
+            }
+
             Session::flash('success', "socio $socio->nombre creado correctamente");
             // Redireccionar a la lista de socios
             redirect("/socio/show/$socio->id");
@@ -79,6 +95,17 @@ class SocioController extends Controller
             } else {
                 // Si no estamos en modo debug, redireccionamos al formulario de creación
                 redirect('/socio/create');
+            }
+        } catch (UploadException $ex) {
+            //throw $th;
+            Session::flash('error', 'No se pudo subir la foto del socio');
+
+            // Si estamos en modo debug, iremos a la página de error
+            if (DEBUG) {
+                throw new Exception($ex->getMessage());
+            } else {
+                // Si no estamos en modo debug, redireccionamos al formulario de creación
+                redirect('/Socio/edit/' . $socio->id); // Redireccionar a la lista de socios
             }
         }
     }

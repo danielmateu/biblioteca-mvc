@@ -7,4 +7,5 @@ class Socio extends Model
     public $nombre = '';
     public $apellidos = '';
     public $poblacion = '';
+    public $foto = '';
 }
