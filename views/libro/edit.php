@@ -68,34 +68,30 @@
 
                         <!-- Edad recomendada -->
                         <div class="mb-3">
-                            <label for="edad_recomendada" class="form-label">Edad recomendada</label>
+                            <label for="edadrecomendada" class="form-label">Edad recomendada</label>
                             <input type="number" name="edadrecomendada" id="edadrecomendada" class="form-control" min=0 placeholder="Edad recomendada" value="<?= $libro->edadrecomendada ?>" required>
                         </div>
                     </div>
 
                     <!-- Portada -->
                     <div class="card mt-4">
-                        <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-4" width="100px">
+
+                        <div class="card ">
+                            <!-- No se encuentra la imagen... -->
+                            <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top" width="100px" id="preview-image">
+                        </div>
 
                         <div class="p-2">
-                            <label for="portada" class="form-label">Portada</label>
-
                             <input type="file" name="portada" id="file-with-preview" class="form-control" accept="image/*">
-
-                            <input type="checkbox" name="eliminarportada" id="">
+                            <input type="checkbox" name="eliminarportada" id="eliminarportada">
                             <label for="eliminarportada">Eliminar portada</label>
-
-
                         </div>
                     </div>
                 </div>
                 <!-- <h2>Creación de Libros</h2> -->
-
                 <input type="submit" value="Editar Libro" class="button" name="actualizar" value="Actualizar">
 
             </form>
-
-
 
         </div>
         <!-- Mostramos los temas -->
