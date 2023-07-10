@@ -20,7 +20,7 @@
 
     <main>
         <!-- Formulario de contacto -->
-        <form action="/Contacto/send" method="POST">
+        <form action="/Contacto/send" method="POST" class="col-6">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduce tu nombre" required>

@@ -29,6 +29,15 @@ class Template implements TemplateInterface
         return $html;
     }
 
+    public static function getBootstrap()
+    {
+        $html = "";
+
+        $html .= '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">';
+
+        return $html;
+    }
+
     /*****************************************************************************
      * LOGIN / LOGOUT
      *****************************************************************************/
@@ -135,19 +144,32 @@ class Template implements TemplateInterface
     {
         $html = "<nav class='px-4 navbar navbar-expand navbar-light bg-light align-items-center justify-content-between'>";
 
-        $html .= "<a class='navbar-brand' href='/'>Biblioteca</a>";
+        $html .= "<a class='navbar-brand d-none d-md-block' href='/'>Biblioteca</a>";
 
         $html .= "<div class='collapse navbar-collapse' id='navbarSupportedContent'>";
 
         $html .= "<ul class='navbar-nav mr-auto'>";
 
-        $html .= "<li class='nav-item'><a href='/Libro' class='nav-link'>Libros</a></li>";
+        // Añadimos la clase active a la página actual
+        $active = $_SERVER['REQUEST_URI'] == '/Libro' ? 'active' : '';
+        $html .= "<li class='nav-item '><a href='/Libro' class='nav-link $active'>Libros</a></li>";
 
-        $html .= "<li class='nav-item'><a href='/Socio' class='nav-link'>Socios</a></li>";
+        $active = $_SERVER['REQUEST_URI'] == '/Socio' ? 'active' : '';
+        $html .= "<li class='nav-item '><a href='/Socio' class='nav-link $active'>Socios</a></li>";
 
-        $html .= "<li class='nav-item'><a href='/Tema' class='nav-link'>Temas</a></li>";
+        $active = $_SERVER['REQUEST_URI'] == '/Tema' ? 'active' : '';
+        $html .= "<li class='nav-item '><a href='/Tema' class='nav-link $active'>Temas</a></li>";
 
-        $html .= "<li class='nav-item'><a href='/Contacto' class='nav-link'>Contacto</a></li>";
+        $active = $_SERVER['REQUEST_URI'] == '/Contacto' ? 'active' : '';
+        $html .= "<li class='nav-item '><a href='/Contacto' class='nav-link $active'>Contacto</a></li>";
+
+        // $html .= "<li class='nav-item'><a href='/Libro' class='nav-link'>Libros</a></li>";
+
+        // $html .= "<li class='nav-item'><a href='/Socio' class='nav-link'>Socios</a></li>";
+
+        // $html .= "<li class='nav-item'><a href='/Tema' class='nav-link'>Temas</a></li>";
+
+        // $html .= "<li class='nav-item'><a href='/Contacto' class='nav-link'>Contacto</a></li>";
 
         $html .= "</ul>";
 
@@ -156,7 +178,7 @@ class Template implements TemplateInterface
         // Si estamos logueados mostramos el nombre del usuario y el botón de logout
         if (Login::check()) {
             $user = Login::user();
-            $html .= "<div class='nav-item'>$user->displayname</div>";
+            $html .= "<div class='nav-item d-none d-md-block'>$user->displayname</div>";
             $html .= "<div class='nav-item'><a href='/Logout' class='nav-link'>Logout</a></div>";
         } else {
             $html .= "<div class='nav-item'><a href='/Login' class='nav-link'>Login</a></div>";

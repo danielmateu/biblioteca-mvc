@@ -58,3 +58,9 @@ function shorten(string $text, int $length = 20): string
 {
     return strlen($text) > $length ? substr($text, 0, $length) . '...' : $text;
 }
+
+// Añadir clase active a un elemento de menú si la URL coincide
+function active(string $url): string
+{
+    return URL::current() === $url ? 'active' : '';
+}

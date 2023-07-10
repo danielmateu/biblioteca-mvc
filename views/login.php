@@ -27,7 +27,7 @@
 			<h2>Acceso a la aplicación</h2>
 			<p>Introduce tus datos en el formulario para identificarte.</p>
 
-			<form class="" method="POST" autocomplete="off"  action="/Login/enter">
+			<form class="" method="POST" autocomplete="off" action="/Login/enter">
 				<div class="mb-3">
 
 					<label for="email">email</label>
@@ -53,7 +53,7 @@
 	</main>
 
 
-	<?= (TEMPLATE)::getFooter() ?>
+	<?= Template::getAltFooter() ?>
 </body>
 
 </html>
