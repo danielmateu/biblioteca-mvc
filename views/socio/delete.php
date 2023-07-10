@@ -20,6 +20,11 @@
 
         <h2>Quieres eliminar a <?= "$socio->nombre $socio->apellidos" ?>?</h2>
 
+        <div class="card my-4 col-md-6 ">
+            <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Foto de perfil" class="card-img-top p-4" width="100px">
+
+        </div>
+
         <!-- Formulario para eliminacion de Socio -->
         <form class="form" method="POST" action="/Socio/destroy">
 

@@ -153,7 +153,7 @@ class SocioController extends Controller
         $socio->nombre = $_POST['nombre'];
         $socio->apellidos = $_POST['apellidos'];
         $socio->poblacion = $_POST['poblacion'];
-        
+
 
         // Guardar el socio en la base de datos
         try {
@@ -165,7 +165,6 @@ class SocioController extends Controller
 
             // Si llega el fichero con la foto del socio, la guardamos
             if (Upload::arrive('foto')) {
-
                 $socio->foto = Upload::save(
                     'foto', // Nombre del campo file del formulario
                     '../public/' . SOCIO_IMAGE_FOLDER, // Ruta donde se guardará el fichero
@@ -180,13 +179,10 @@ class SocioController extends Controller
 
             // Si hay que eliminar la foto antigua, el socio tenia una anterior y no llega una nueva
             if (isset($_POST['eliminarperfil']) && $oldFoto && !Upload::arrive('foto')) {
-                // Eliminar la foto antigua
-                // Upload::delete($oldFoto, '../public/' . SOCIO_IMAGE_FOLDER);
-                $socio->foto = NULL; // Limpiar el nombre de la foto en la base de datos
-                $secondUpdate = true; // Hay que hacer un segundo update
+                $socio->foto = NULL;
+                $secondUpdate = true;
             }
 
-            // Si hay que hacer un segundo update, lo hacemos
             if ($secondUpdate) {
                 $socio->update();
                 @unlink('../public/' . SOCIO_IMAGE_FOLDER . $oldFoto); // Eliminar la foto antigua  
@@ -256,6 +252,12 @@ class SocioController extends Controller
         try {
             //code...
             $socio->deleteObject();
+
+            // Si el socio tenía una foto, la borramos
+            if ($socio->foto) {
+                @unlink('../public/' . SOCIO_IMAGE_FOLDER . $socio->foto);
+            }
+
             Session::flash('success', "socio $socio->nombre $socio->apellidos borrado correctamente");
             // Redireccionar a la lista de socios
             redirect('/socio');
