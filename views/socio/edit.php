@@ -33,25 +33,25 @@
                 <!-- DNI -->
                 <div class="mb-3">
                     <label for="dni">DNI</label>
-                    <input type="text" name="dni" value="<?= $socio->dni ?>" required>
+                    <input type="text" name="dni" value="<?= $socio->dni ?>" required id="dni">
                 </div>
 
                 <!-- Nombre -->
                 <div class="mb-3">
                     <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" value="<?= $socio->nombre ?>" required>
+                    <input type="text" name="nombre" value="<?= $socio->nombre ?>" required id="nombre">
                 </div>
 
                 <!-- Apellidos -->
                 <div class="mb-3">
                     <label for="apellidos">Apellidos</label>
-                    <input type="text" name="apellidos" value="<?= $socio->apellidos ?>" required>
+                    <input type="text" name="apellidos" value="<?= $socio->apellidos ?>" required id="apellidos">
                 </div>
 
                 <!-- Población -->
                 <div class="mb-3">
                     <label for="poblacion">Población</label>
-                    <input type="text" name="poblacion" value="<?= $socio->poblacion ?>" required>
+                    <input type="text" name="poblacion" value="<?= $socio->poblacion ?>" required id="poblacion">
                 </div>
 
                 <input type="submit" value="Editar Socio" class="button" name="actualizar" value="Actualizar">
@@ -61,10 +61,10 @@
                 <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-4" width="100px" id='preview-image'>
 
                 <div class="p-2">
-                    <label for="perfil" class="form-label">Foto perfil</label>
-                    <input type="file" name="perfil" id="file-with-preview" class="form-control" accept="image/*">
+                    <label for="file-with-preview" class="form-label">Foto de perfil</label>
+                    <input type="file" name="foto" id="file-with-preview" class="form-control" accept="image/*">
 
-                    <input type="checkbox" name="eliminarperfil">
+                    <input type="checkbox" name="eliminarperfil" id="eliminarperfil">
                     <label for="eliminarperfil">Eliminar foto de perfil</label>
                 </div>
             </div>

@@ -38,7 +38,7 @@
                 <?= $socio->poblacion ?>
             </p>
 
-            <div class="card ">
+            <div class="card p-4">
                 <!-- No se encuentra la imagen... -->
                 <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Imagen de perfil" class="card-img-top" width="100px">
                 <!-- No se encuentra la imagen... -->

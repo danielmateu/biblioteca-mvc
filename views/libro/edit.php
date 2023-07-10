@@ -79,10 +79,17 @@
                         <div class="card ">
                             <!-- No se encuentra la imagen... -->
                             <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top" width="100px" id="preview-image">
+                            <!-- No se encuentra la imagen... -->
+                            <div class="card-body">
+                                <p class="card-text">Portada de <?= "$libro->titulo, de $libro->autor" ?> </p>
+                            </div>
                         </div>
 
+
                         <div class="p-2">
+                            <label for="file-with-preview" class="form-label">Portada</label>
                             <input type="file" name="portada" id="file-with-preview" class="form-control" accept="image/*">
+
                             <input type="checkbox" name="eliminarportada" id="eliminarportada">
                             <label for="eliminarportada">Eliminar portada</label>
                         </div>

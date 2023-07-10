@@ -153,6 +153,7 @@ class SocioController extends Controller
         $socio->nombre = $_POST['nombre'];
         $socio->apellidos = $_POST['apellidos'];
         $socio->poblacion = $_POST['poblacion'];
+        
 
         // Guardar el socio en la base de datos
         try {
@@ -178,7 +179,7 @@ class SocioController extends Controller
             }
 
             // Si hay que eliminar la foto antigua, el socio tenia una anterior y no llega una nueva
-            if (isset($_POST['eliminarportada']) && $oldFoto && !Upload::arrive('foto')) {
+            if (isset($_POST['eliminarperfil']) && $oldFoto && !Upload::arrive('foto')) {
                 // Eliminar la foto antigua
                 // Upload::delete($oldFoto, '../public/' . SOCIO_IMAGE_FOLDER);
                 $socio->foto = NULL; // Limpiar el nombre de la foto en la base de datos

@@ -163,12 +163,10 @@ define('API_AUTHENTICATION', 'COOKIE'); // puede ser COOKIE (implementado) o KEY
 
 // Carpeta para las portadas de los libros
 define('BOOK_IMAGE_FOLDER', '/images/books');
-
 // Imagen por defecto para los libros
 define('DEFAULT_BOOK_IMAGE', 'cover.png');
 
 // Carpeta para las portadas de los socios
 define('SOCIO_IMAGE_FOLDER', '/images/socios');
-
 // Imagen por defecto para los socios
 define('DEFAULT_SOCIO_IMAGE', 'default.png');
