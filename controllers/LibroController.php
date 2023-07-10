@@ -193,6 +193,40 @@ class LibroController extends Controller
         try {
             //code...
             $libro->update();
+
+            // Si llega el fichero con la portada, haremos un segundo update
+            $secondUpdate = false; // Flag para saber si se ha hecho el segundo update
+            $oldCover = $libro->portada; // Guardamos la portada anterior
+
+            if (Upload::arrive('portada')) {
+                $libro->portada = Upload::save(
+                    // nombre del input
+                    'portada',
+                    // Ruta de la carpeta de destino
+                    '../public/' . BOOK_IMAGE_FOLDER,
+                    // Generar un nombre aleatorio
+                    true,
+                    // Tamaño máximo
+                    0,
+                    // timpo mime
+                    'image/*',
+                    // Prefijo del nombre
+                    'book_'
+                );
+                $secondUpdate = true;
+            }
+
+            // Si hay que eliminar portada, el libro tenia una anterior y no llega una nueva
+            if (isset($_POST['eliminarportada']) && $oldCover && !Upload::arrive('portada')) {
+                $libro->portada = null;
+                $secondUpdate = true;
+            }
+
+            if ($secondUpdate) {
+                $libro->update();
+                @unlink('../public/' . BOOK_IMAGE_FOLDER . $oldCover); // Eliminamos la portada anterior
+            }
+
             Session::flash('success', "Libro $libro->titulo actualizado correctamente");
             // Redireccionar a la lista de libros
             redirect("/Libro/edit/$id");
@@ -206,6 +240,14 @@ class LibroController extends Controller
             } else {
                 // Si no estamos en modo debug, redireccionamos al formulario de edición
                 redirect("/Libro/edit/$id");
+            }
+        } catch (UploadException $ex) {
+            Session::flash('error', 'El libro se actualizó correctamente pero no se pudo subir la portada');
+
+            if (DEBUG) {
+                throw new Exception($ex->getMessage());
+            } else {
+                redirect("/Libro/edit/$libro->id"); // Redireccionamos al formulario de edición
             }
         }
     }
