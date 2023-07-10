@@ -29,8 +29,8 @@
                 <tr>
                     <th scope="col" class="">Portada</th>
                     <th scope="col" class="">Título</th>
-                    <th scope="col" class="">Autor</th>
-                    <th scope="col" class="">Editorial</th>
+                    <th scope="col" class="d-none d-md-table-cell">Autor</th>
+                    <th scope="col" class="d-none d-md-table-cell">Editorial</th>
                     <!-- <th scope="col" class="">ISBN</th> -->
                     <th scope="col" class="">Acciones</th>
                 </tr>
@@ -41,8 +41,8 @@
                     <td><img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" width="100px" class="cover-mini">
                     </td>
                     <td><?= $libro->titulo ?></td>
-                    <td><?= $libro->autor ?></td>
-                    <td class=""><?= $libro->editorial ?></td>
+                    <td class="d-none d-md-table-cell "><?= $libro->autor ?></td>
+                    <td class="d-none d-md-table-cell"><?= $libro->editorial ?></td>
                     <!-- <td><?= $libro->isbn ?></td> -->
                     <td class="">
                         <a class="" href=" /Libro/show/<?= $libro->id ?>">🔎</a>

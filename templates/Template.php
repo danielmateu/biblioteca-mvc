@@ -151,16 +151,16 @@ class Template implements TemplateInterface
         $html .= "<ul class='navbar-nav mr-auto'>";
 
         // Añadimos la clase active a la página actual
-        $active = $_SERVER['REQUEST_URI'] == '/Libro' ? 'active' : '';
+        $active = $_SERVER['REQUEST_URI'] == '/Libro' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Libro' class='nav-link $active'>Libros</a></li>";
 
-        $active = $_SERVER['REQUEST_URI'] == '/Socio' ? 'active' : '';
+        $active = $_SERVER['REQUEST_URI'] == '/Socio' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Socio' class='nav-link $active'>Socios</a></li>";
 
-        $active = $_SERVER['REQUEST_URI'] == '/Tema' ? 'active' : '';
+        $active = $_SERVER['REQUEST_URI'] == '/Tema' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Tema' class='nav-link $active'>Temas</a></li>";
 
-        $active = $_SERVER['REQUEST_URI'] == '/Contacto' ? 'active' : '';
+        $active = $_SERVER['REQUEST_URI'] == '/Contacto' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Contacto' class='nav-link $active'>Contacto</a></li>";
 
         // $html .= "<li class='nav-item'><a href='/Libro' class='nav-link'>Libros</a></li>";
