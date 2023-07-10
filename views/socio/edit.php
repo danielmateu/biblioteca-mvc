@@ -47,6 +47,12 @@
                     <input type="text" name="apellidos" value="<?= $socio->apellidos ?>" required id="apellidos">
                 </div>
 
+                <!-- email -->
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" value="<?= $socio->email ?>" required id="email">
+                </div>
+
                 <!-- Población -->
                 <div class="mb-3">
                     <label for="poblacion">Población</label>

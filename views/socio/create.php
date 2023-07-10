@@ -44,6 +44,12 @@
                 <input type="text" name="poblacion" id="poblacion" class="form-control" placeholder="Introduce la población" required>
             </div>
 
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" placeholder="Introduce el email" class="form-control" required>
+            </div>
+
             <!-- Foto -->
             <div class="mb-3">
                 <label for="foto" class="form-label">Foto de perfil</label>

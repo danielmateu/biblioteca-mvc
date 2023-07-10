@@ -60,6 +60,7 @@ class SocioController extends Controller
         $socio->nombre = $_POST['nombre'];
         $socio->apellidos = $_POST['apellidos'];
         $socio->poblacion = $_POST['poblacion'];
+        $socio->email = $_POST['email'];
 
         // Guardar el socio en la base de datos
         try {
