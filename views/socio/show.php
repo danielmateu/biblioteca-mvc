@@ -20,7 +20,8 @@
 
     <main>
 
-        <div class="">
+        <div class="d-flex justify-content-between">
+
             <p>
                 <!-- DNI -->
                 <strong>DNI:</strong>
@@ -35,24 +36,21 @@
                 <!-- Población -->
                 <strong>Población:</strong>
                 <?= $socio->poblacion ?>
-
-                <!-- Imagen socio -->
-                <!-- <strong>Imagen:</strong>
-                <br> -->
-                <!-- <img src="../../public/images/profile.png" alt="Imagen del socio"> -->
             </p>
 
-
-        </div>
-
-        <div class="d-flex justify-content-center gap-2">
-            <!-- Botones para volver, editar y borrar -->
-            <a class="btn btn-primary" href="/socio">Volver</a>
-            <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a>
-            <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a>
+            <div class="">
+                <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Imagen de perfil" class="cover-mini">
+            </div>
         </div>
 
     </main>
+
+    <div class="d-flex justify-content-center gap-2">
+        <!-- Botones para volver, editar y borrar -->
+        <a class="btn btn-primary" href="/socio">Volver</a>
+        <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a>
+        <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a>
+    </div>
 
     <?= Template::getAltFooter() ?>
 </body>

@@ -21,9 +21,7 @@
 
         <form class="form col-6" method="POST" action="/Socio/store">
             <!-- DNI -->
-
             <!-- <input type="number" name="id" hidden> -->
-
             <div class="mb-3">
                 <label for="dni" class="form-label">DNI</label>
                 <input type="text" name="dni" id="dni" class="form-control" placeholder="Introduce el DNI" required>
@@ -47,15 +45,14 @@
             <input type="submit" value="Crear Socio" class="button" name="Guardar">
         </form>
 
-        <div class="d-flex justify-content-center gap-2">
-            <!-- Botones para volver, editar y borrar -->
-            <a class="btn btn-primary" href="/socio">Volver</a>
-            <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a>
-            <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a> -->
-        </div>
-
-
     </main>
+
+    <div class="d-flex justify-content-center gap-2">
+        <!-- Botones para volver, editar y borrar -->
+        <a class="btn btn-primary" href="/socio">Volver</a>
+        <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a>
+            <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a> -->
+    </div>
 
     <?= Template::getAltFooter() ?>
 </body>
