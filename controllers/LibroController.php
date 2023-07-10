@@ -299,6 +299,12 @@ class LibroController extends Controller
         try {
             //code...
             $libro->deleteObject();
+
+            // Si el libro tenía portada, la eliminamos
+            if ($libro->portada) {
+                @unlink('../public/' . BOOK_IMAGE_FOLDER . '/' . $libro->portada);
+            }
+
             Session::flash('success', "Libro $libro->titulo borrado correctamente");
             // Redireccionar a la lista de libros
             redirect('/Libro');

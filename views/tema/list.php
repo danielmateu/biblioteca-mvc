@@ -18,7 +18,7 @@
 
     <main>
 
-        <a href="/Tema/create" class="btn btn-outline-primary">Crear Tema</a>
+        <a href="/Tema/create" class="btn btn-outline-primary mb-2">Crear Tema</a>
 
         <table class="table table-dark  table-striped table-hover rounded-3">
             <tr>

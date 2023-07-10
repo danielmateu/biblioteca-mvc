@@ -21,12 +21,7 @@
 <body>
 	<?= (TEMPLATE)::getMenuBootstrap() ?>
 	<?= (TEMPLATE)::getHeaderAlt('Nueva clave') ?>
-	<?=
-	(TEMPLATE)::getBreadCrumbs([
-		"LogIn" => "/Login",
-		"Nueva clave" => NULL
-	])
-	?>
+
 	<?= (TEMPLATE)::getFlashes() ?>
 
 	<main>
@@ -58,7 +53,7 @@
 
 	</main>
 
-	<?= (TEMPLATE)::getFooter() ?>
+	<?= Template::getAltFooter() ?>
 </body>
 
 </html>

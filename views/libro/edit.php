@@ -75,7 +75,7 @@
 
                     <!-- Portada -->
                     <div class="card mt-4">
-                        <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-2" width="100px">
+                        <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-4" width="100px">
 
                         <div class="p-2">
                             <label for="portada" class="form-label">Portada</label>

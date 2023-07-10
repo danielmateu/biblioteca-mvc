@@ -18,7 +18,7 @@
 
     <main>
 
-        <a href="/Socio/create" class="btn btn-outline-primary ">Crear Socio</a>
+        <a href="/Socio/create" class="btn btn-outline-primary mb-2 ">Crear Socio</a>
 
         <table class="table table-dark  table-striped table-hover rounded-3">
             <tr>

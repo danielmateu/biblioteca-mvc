@@ -24,10 +24,8 @@
         <h2>Quieres eliminar <?= $libro->titulo ?>?</h2>
 
         <!-- Formulario para edicion de libro -->
-
-
-        <div class="card my-4">
-            <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-2" width="100px">
+        <div class="card my-4 col-md-6 ">
+            <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-4" width="100px">
 
         </div>
 
@@ -39,9 +37,6 @@
 
             <input type="submit" value="Eliminar Libro" class="btn btn-danger" name="borrar" value="Borrar">
         </form>
-
-
-
 
 
     </main>
