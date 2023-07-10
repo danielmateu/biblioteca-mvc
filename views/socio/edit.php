@@ -24,7 +24,6 @@
 
         <!-- Formulario para edicion de libro -->
         <div class="d-flex align-items-start justify-content-center gap-4">
-
             <form class="form col-6" method="POST" action="/Socio/update" enctype="multipart/form-data">
 
                 <!-- Input oculto que contiene el ID del socio a actualizar -->
@@ -54,18 +53,22 @@
                     <input type="text" name="poblacion" value="<?= $socio->poblacion ?>" required id="poblacion">
                 </div>
 
+                <label for="file-with-preview" class="form-label">Foto de perfil</label>
+                <input type="file" name="foto" id="file-with-preview" class="form-control" accept="image/*">
+
+                <input type="checkbox" name="eliminarperfil" id="eliminarperfil">
+                <label for="eliminarperfil">Eliminar foto de perfil</label>
+
                 <input type="submit" value="Editar Socio" class="button" name="actualizar" value="Actualizar">
+
+
             </form>
 
             <div class="card mt-2">
                 <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-4" width="100px" id='preview-image'>
 
                 <div class="p-2">
-                    <label for="file-with-preview" class="form-label">Foto de perfil</label>
-                    <input type="file" name="foto" id="file-with-preview" class="form-control" accept="image/*">
 
-                    <input type="checkbox" name="eliminarperfil" id="eliminarperfil">
-                    <label for="eliminarperfil">Eliminar foto de perfil</label>
                 </div>
             </div>
         </div>
