@@ -11,6 +11,7 @@ class Libro extends Model
     public $idioma = '';
     public $ediciones = '';
     public $edadrecomendada = 0;
+    public $portada = '';
 
     // Métodos no heredados
     public function getTemas(): array

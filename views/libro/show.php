@@ -25,7 +25,7 @@
         </h2>
 
         <div class="d-flex justify-content-between">
-            <p>
+            <p class="col-6">
                 <strong>Autor:</strong>
                 <?= $libro->autor ?>
                 <br>
@@ -39,7 +39,7 @@
                 <?= " $libro->edadrecomendada años" ?>
             </p>
 
-            <div class="card">
+            <div class="card ">
                 <!-- No se encuentra la imagen... -->
                 <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top" width="100px">
                 <!-- No se encuentra la imagen... -->

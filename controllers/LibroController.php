@@ -83,6 +83,25 @@ class LibroController extends Controller
             //code...
             $libro->save();
 
+            // Si llega el fichero con la portada
+            if (Upload::arrive('portada')) {
+                $libro->portada = Upload::save(
+                    // nombre del input
+                    'portada',
+                    // Ruta de la carpeta de destino
+                    '../public/' . BOOK_IMAGE_FOLDER,
+                    // Generar un nombre aleatorio
+                    true,
+                    // Tamaño máximo
+                    124000,
+                    // timpo mime
+                    'image/*',
+                    // Prefijo del nombre
+                    'book_'
+                );
+                $libro->update();
+            }
+
             Session::flash('success', "Libro $libro->titulo creado correctamente");
             // Redireccionar a la lista de libros
             redirect("/Libro/show/$libro->id");
@@ -96,6 +115,14 @@ class LibroController extends Controller
             } else {
                 // Si no estamos en modo debug, redireccionamos al formulario de creación
                 redirect('/Libro/create');
+            }
+        } catch (UploadException $ex) {
+            Session::flash('error', 'El libro se guardó correctamente pero no se pudo subir la portada');
+
+            if (DEBUG) {
+                throw new Exception($ex->getMessage());
+            } else {
+                redirect("/Libro/edit/$libro->id");
             }
         }
     }
