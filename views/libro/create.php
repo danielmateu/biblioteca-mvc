@@ -7,6 +7,8 @@
     <title><?= APP_NAME ?> - Creación Libro</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Script para previsualización -->
+    <script src="/js/Preview.js"></script>
 </head>
 
 <body>
@@ -16,11 +18,10 @@
     <?= Template::getSuccess() ?>
     <?= Template::getError() ?>
 
-    <main class="">
+    <main class="d-flex justify-content-between align-items-center gap-4">
 
         <!-- Formulario para creación de libro -->
-
-        <form class="form col-6" method="POST" action="/Libro/store">
+        <form class="form col-6" method="POST" action="/Libro/store" enctype="multipart/form-data">
             <!-- <h2>Creación de Libros</h2> -->
             <div class="mb-3">
                 <label for="isbn" class="form-label">ISBN</label>
@@ -74,23 +75,35 @@
                 <p>Puedes añadir más temas desde la opción de edición</p>
             </div>
 
+            <!-- Imagen -->
+            <div class="mb-3">
+                <label for="portada" class="form-label">Portada</label>
+                <input type="file" name="portada" id="file-with-preview" class="form-control" placeholder="Elige la portada" accept="image/*">
+            </div>
+
 
             <input type="submit" value="Crear Libro" class="button" name="Guardar">
         </form>
 
-
-        <div class="d-flex justify-content-center gap-2">
-            <!-- Botones para volver, editar y borrar -->
-            <a class="btn btn-primary" href="/libro">Volver</a>
-            <!-- <a class="btn btn-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
-            <a class="btn btn-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a> -->
+        <!-- Prvisualización -->
+        <div class="card p-4">
+            <h4>Imagen de previsualización</h4>
+            <img id="preview-image" src="<?= BOOK_IMAGE_FOLDER . '/' . DEFAULT_BOOK_IMAGE ?>" alt="Imagen de previsualización" class="card-img-top">
         </div>
 
 
-
     </main>
+    <div class="d-flex justify-content-center gap-2">
+        <!-- Botones para volver, editar y borrar -->
+        <a class="btn btn-primary" href="/libro">Volver</a>
+        <!-- <a class="btn btn-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
+        <a class="btn btn-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a> -->
+    </div>
 
     <?= Template::getAltFooter() ?>
+
+
+
 </body>
 
 </html>

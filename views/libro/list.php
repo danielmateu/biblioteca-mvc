@@ -21,27 +21,30 @@
         <!-- <h1><?= APP_NAME ?></h1>
         <h2>Lista de libros</h2> -->
         <!-- Tabla que muestra los libros -->
-        <a href="/Libro/create" class="btn btn-outline-primary">Crear Libro</a>
+        <a href="/Libro/create" class="btn btn-outline-primary mb-2">Crear Libro</a>
 
-        <table class="table table-dark  table-striped table-hover rounded-3">
+        <table class="table table-dark table-striped table-hover rounded-3">
             <thead>
                 <tr>
+                    <th scope="col" class="">Portada</th>
                     <th scope="col" class="">Título</th>
                     <th scope="col" class="">Autor</th>
                     <th scope="col" class="">Editorial</th>
-                    <th scope="col" class="">ISBN</th>
+                    <!-- <th scope="col" class="">ISBN</th> -->
                     <th scope="col" class="">Acciones</th>
                 </tr>
             </thead>
 
             <?php foreach ($libros as $libro) : ?>
                 <tr>
+                    <td><img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" width="100px" class="cover-mini">
+                    </td>
                     <td><?= $libro->titulo ?></td>
                     <td><?= $libro->autor ?></td>
                     <td><?= $libro->editorial ?></td>
-                    <td><?= $libro->isbn ?></td>
+                    <!-- <td><?= $libro->isbn ?></td> -->
                     <td class="">
-                        <a class="" href="/Libro/show/<?= $libro->id ?>">🔎</a>
+                        <a class="" href=" /Libro/show/<?= $libro->id ?>">🔎</a>
                         <a class="" href="/Libro/edit/<?= $libro->id ?>">✏️</a>
                         <a class="" href="/Libro/delete/<?= $libro->id ?>">🗑️</a>
                     </td>

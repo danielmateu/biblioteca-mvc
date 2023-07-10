@@ -160,3 +160,10 @@ define('ALLOW_HEADERS', 'csrf_token');               // Encabezados permitidos.
 define('ALLOW_CREDENTIALS', 'true');                 // ¿Se permite el envío de credenciales?
 
 define('API_AUTHENTICATION', 'COOKIE'); // puede ser COOKIE (implementado) o KEY (no implementado aún)
+
+
+// Carpeta para las portadas de los libros
+define('BOOK_IMAGE_FOLDER', '/images/books');
+
+// Imagen por defecto para los libros
+define('DEFAULT_BOOK_IMAGE', 'cover.png');

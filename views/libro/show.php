@@ -24,7 +24,7 @@
             <?= $libro->titulo ?>
         </h2>
 
-        <div>
+        <div class="d-flex justify-content-between">
             <p>
                 <strong>Autor:</strong>
                 <?= $libro->autor ?>
@@ -38,6 +38,15 @@
                 <strong>Edad recomendada:</strong>
                 <?= " $libro->edadrecomendada años" ?>
             </p>
+
+            <div class="card">
+                <!-- No se encuentra la imagen... -->
+                <img src="<?= BOOK_IMAGE_FOLDER . '/' . ($libro->portada ?? DEFAULT_BOOK_IMAGE) ?> " alt="Portada del libro" class="card-img-top" width="100px">
+                <!-- No se encuentra la imagen... -->
+                <div class="card-body">
+                    <p class="card-text">Portada de <?= "$libro->titulo, de $libro->autor" ?> </p>
+                </div>
+            </div>
         </div>
 
         <!-- Mostramos los temas -->
