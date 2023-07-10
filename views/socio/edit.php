@@ -7,6 +7,7 @@
     <title><?= APP_NAME ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="/js/Preview.js"></script>
 </head>
 
 <body>
@@ -22,51 +23,64 @@
     <main class="">
 
         <!-- Formulario para edicion de libro -->
+        <div class="d-flex align-items-start justify-content-center gap-4">
 
-        <form class="form" method="POST" action="/Socio/update">
+            <form class="form col-6" method="POST" action="/Socio/update" enctype="multipart/form-data">
 
-            <!-- Input oculto que contiene el ID del socio a actualizar -->
-            <input type="hidden" name="id" value="<?= $socio->id ?>">
+                <!-- Input oculto que contiene el ID del socio a actualizar -->
+                <input type="hidden" name="id" value="<?= $socio->id ?>">
 
-            <!-- DNI -->
-            <div class="mb-3">
-                <label for="dni">DNI</label>
-                <input type="text" name="dni" value="<?= $socio->dni ?>" required>
+                <!-- DNI -->
+                <div class="mb-3">
+                    <label for="dni">DNI</label>
+                    <input type="text" name="dni" value="<?= $socio->dni ?>" required>
+                </div>
+
+                <!-- Nombre -->
+                <div class="mb-3">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" value="<?= $socio->nombre ?>" required>
+                </div>
+
+                <!-- Apellidos -->
+                <div class="mb-3">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" name="apellidos" value="<?= $socio->apellidos ?>" required>
+                </div>
+
+                <!-- Población -->
+                <div class="mb-3">
+                    <label for="poblacion">Población</label>
+                    <input type="text" name="poblacion" value="<?= $socio->poblacion ?>" required>
+                </div>
+
+                <input type="submit" value="Editar Socio" class="button" name="actualizar" value="Actualizar">
+            </form>
+
+            <div class="card mt-2">
+                <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Portada del libro" class="card-img-top p-4" width="100px" id='preview-image'>
+
+                <div class="p-2">
+                    <label for="perfil" class="form-label">Foto perfil</label>
+                    <input type="file" name="perfil" id="file-with-preview" class="form-control" accept="image/*">
+
+                    <input type="checkbox" name="eliminarperfil">
+                    <label for="eliminarperfil">Eliminar foto de perfil</label>
+                </div>
             </div>
-
-            <!-- Nombre -->
-            <div class="mb-3">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" value="<?= $socio->nombre ?>" required>
-            </div>
-
-            <!-- Apellidos -->
-            <div class="mb-3">
-                <label for="apellidos">Apellidos</label>
-                <input type="text" name="apellidos" value="<?= $socio->apellidos ?>" required>
-            </div>
-
-            <!-- Población -->
-            <div class="mb-3">
-                <label for="poblacion">Población</label>
-                <input type="text" name="poblacion" value="<?= $socio->poblacion ?>" required>
-            </div>
-
-            <input type="submit" value="Editar Socio" class="button" name="actualizar" value="Actualizar">
-        </form>
-
-
-
-        <!-- Botón que nos redirija a la lista de libros -->
-        <div class="d-flex justify-content-center gap-2">
-            <!-- Botones para volver, editar y borrar -->
-            <a class="btn btn-primary" href="/socio">Volver</a>
-            <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a> -->
-            <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a>
         </div>
 
+        <!-- Foto Perfil -->
 
     </main>
+
+    <!-- Botón que nos redirija a la lista de libros -->
+    <div class="d-flex justify-content-center gap-2">
+        <!-- Botones para volver, editar y borrar -->
+        <a class="btn btn-primary" href="/socio">Volver</a>
+        <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a> -->
+        <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar Socio</a>
+    </div>
 
     <?= Template::getAltFooter() ?>
 </body>

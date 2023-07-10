@@ -22,7 +22,7 @@
 
         <div class="d-flex justify-content-between">
 
-            <p>
+            <p class='col-6'>
                 <!-- DNI -->
                 <strong>DNI:</strong>
                 <?= $socio->dni ?>
@@ -38,8 +38,13 @@
                 <?= $socio->poblacion ?>
             </p>
 
-            <div class="">
-                <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Imagen de perfil" class="cover-mini">
+            <div class="card ">
+                <!-- No se encuentra la imagen... -->
+                <img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Imagen de perfil" class="card-img-top" width="100px">
+                <!-- No se encuentra la imagen... -->
+                <div class="card-body">
+                    <p class="card-text text-center"><?= "$socio->nombre $socio->apellidos" ?></p>
+                </div>
             </div>
         </div>
 

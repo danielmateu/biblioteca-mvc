@@ -158,6 +158,39 @@ class SocioController extends Controller
         try {
             //code...
             $socio->update();
+
+            $secondUpdate = false; // Flag para controlar si hay que hacer un segundo update
+            $oldFoto = $socio->foto; // Guardamos el nombre de la foto antigua
+
+            // Si llega el fichero con la foto del socio, la guardamos
+            if (Upload::arrive('foto')) {
+
+                $socio->foto = Upload::save(
+                    'foto', // Nombre del campo file del formulario
+                    '../public/' . SOCIO_IMAGE_FOLDER, // Ruta donde se guardará el fichero
+                    true, // generar nombre único
+                    0, // Tamaño máximo
+                    'image/*', // Tipo mime permitido
+                    'profile_' // Prefijo para el nombre del fichero
+                );
+
+                $secondUpdate = true; // Hay que hacer un segundo update
+            }
+
+            // Si hay que eliminar la foto antigua, el socio tenia una anterior y no llega una nueva
+            if (isset($_POST['eliminarportada']) && $oldFoto && !Upload::arrive('foto')) {
+                // Eliminar la foto antigua
+                // Upload::delete($oldFoto, '../public/' . SOCIO_IMAGE_FOLDER);
+                $socio->foto = NULL; // Limpiar el nombre de la foto en la base de datos
+                $secondUpdate = true; // Hay que hacer un segundo update
+            }
+
+            // Si hay que hacer un segundo update, lo hacemos
+            if ($secondUpdate) {
+                $socio->update();
+                @unlink('../public/' . SOCIO_IMAGE_FOLDER . $oldFoto); // Eliminar la foto antigua  
+            }
+
             Session::flash('success', "socio $socio->titulo actualizado correctamente");
             // Redireccionar a la lista de socios
             redirect("/socio/edit/$id");

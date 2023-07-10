@@ -46,14 +46,14 @@
 
         </table>
 
-        <div class="d-flex justify-content-center gap-2">
-            <!-- Botones para volver, editar y borrar -->
-            <a class="btn btn-primary" href="/socio">Volver</a>
-            <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a> -->
-            <!-- <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a> -->
-        </div>
-
     </main>
+
+    <div class="d-flex justify-content-center gap-2">
+        <!-- Botones para volver, editar y borrar -->
+        <a class="btn btn-primary" href="/">Volver</a>
+        <!-- <a class="btn btn-secondary" href="/socio/edit/<?= $socio->id ?>">Editar</a> -->
+        <!-- <a class="btn btn-danger" href="/socio/delete/<?= $socio->id ?>">Borrar</a> -->
+    </div>
 
     <?= Template::getAltFooter() ?>
 </body>
