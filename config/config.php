@@ -123,10 +123,6 @@ define('USER_PROVIDER', 'User');   // La única opción incluida es User.
 define('USER_ROLES', [
     'Usuario'       => 'ROLE_USER',
     'Administrador' => 'ROLE_ADMIN',
-    'Supervisor'    => 'ROLE_SUPERVISOR',
-    'Editor'        => 'ROLE_EDITOR',
-    'Test'          => 'ROLE_TEST',
-    'API'           => 'ROLE_API'
 ]);
 
 // Rol para el administrador (debe ser uno de los que están en la lista anterior).

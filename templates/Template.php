@@ -169,17 +169,20 @@ class Template implements TemplateInterface
         // Si estamos logueados mostramos el nombre del usuario y el botón de logout
         if (Login::check()) {
             $user = Login::user();
-            $html .= "<div class='d-flex flex-wrap'>";
+            $html .= "<div class='d-flex justify-content-between gap-2 flex-wrap'>";
             // Si estamos logueados y somos administradores mostramos el botón de administración
             if (Login::isAdmin()) {
-                $html .= "<div class='nav-item'><a href='/User/create' class='nav-link'>Usuarios</a></div>";
+                $active = $_SERVER['REQUEST_URI'] == '/User' ? 'active fw-semibold' : '';
+                $html .= "<div class='nav-item'><a href='/User/create' class='nav-link $active'>Usuarios</a></div>";
             }
-            $html .= "<div class='nav-item d-none d-md-block'><a href='/User/home' class='nav-link'>$user->displayname</a></div>";
+            $active = $_SERVER['REQUEST_URI'] == '/User' ? 'active fw-semibold' : '';
+            $html .= "<div class='nav-item d-none d-md-block'><a href='/User/home' class='nav-link $active'>$user->displayname</a></div>";
             $html .= "<div class='nav-item'><a href='/Logout' class='nav-link'>Logout</a></div>";
 
             $html .= "</div>";
         } else {
-            $html .= "<div class='nav-item'><a href='/Login' class='nav-link'>Login</a></div>";
+            $active = $_SERVER['REQUEST_URI'] == '/Login' ? 'active fw-semibold' : '';
+            $html .= "<div class='nav-item'><a href='/Login' class='nav-link $active'>Login</a></div>";
         }
 
 
