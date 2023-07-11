@@ -11,11 +11,23 @@ class SocioController extends Controller
     }
 
     // Metodo list(): Muestra el listado de socios
-    public function list()
+    public function list(int $page = 1)
     {
+        // Resultados por página
+        $limit = RESULTS_PER_PAGE;
+        $total = Socio::total();
+
+        // Crear el objeto de paginación
+        $paginator = new Paginator('/Socio/list', $page, $limit, $total);
+
+        // Recupera los socios par la página actual
+        $socios = Socio::orderBy('id', 'ASC', $limit, $paginator->getOffset());
 
         // Recupera la lista de socios y carga la vista. En la vista disponemos de una variable llamada $socios
-        $this->loadView('socio/list', ['socios' => socio::all()]);
+        $this->loadView('socio/list', [
+            'socios' => $socios,
+            'paginator' => $paginator,
+        ]);
     }
 
     // Metodo show(): Muestra los detalles de un socio

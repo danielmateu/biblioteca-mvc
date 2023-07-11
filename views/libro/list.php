@@ -87,7 +87,8 @@
 
         <!-- Paginación -->
 
-        <?= $paginator->ellipsisLinks() ?>
+        <!--  -->
+        <?= $paginator->links() ?>
 
 
     </main>

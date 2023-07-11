@@ -17,8 +17,14 @@
     <?= (TEMPLATE)::getError() ?>
 
     <main>
-
-        <a href="/Socio/create" class="btn btn-outline-primary mb-2 ">Crear Socio</a>
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="/Socio/create" class="btn btn-outline-primary mb-2 ">Crear Socio</a>
+            <div>
+                <?=
+                $paginator->stats()
+                ?>
+            </div>
+        </div>
 
         <table class="table table-dark  table-striped table-hover rounded-3">
             <tr>
@@ -46,7 +52,9 @@
                 </tr>
             <?php endforeach; ?>
 
+
         </table>
+        <?= $paginator->ellipsisLinks() ?>
 
     </main>
 
