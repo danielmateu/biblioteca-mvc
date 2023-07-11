@@ -16,6 +16,43 @@ class UserController extends Controller
         ]);
     }
 
+    public function list()
+    {
+        Auth::check(); // solo para usuarios identificados
+
+        // método responsable de mostrar el listado de usuarios
+        $this->loadView('user/list', [
+            'users' => User::all()
+        ]);
+    }
+
+    public function show(int $id = 0)
+    {
+        // Método responsable de mostrar los detalles del User
+        Auth::check(); // solo para usuarios identificados
+
+        // Recuperamos el id vía GET
+        $id = empty($_GET['id']) ? 0 : $_GET['id'];
+
+        // Si no nos llega el id
+        if (!$id) {
+            throw new Exception('No se indicó el usuario a mostrar');
+        }
+
+        // Recuperamos el usuario
+        $user = User::find($id);
+
+        // Si no existe el usuario
+        if (!$user) {
+            throw new Exception('No existe el usuario indicado');
+        }
+
+        // Mostramos la vista de detalles
+        $this->loadView('user/show', [
+            'user' => $user
+        ]);
+    }
+
     public function create()
     {
         // Solo para administradores
@@ -57,13 +94,16 @@ class UserController extends Controller
             $user->save();
 
             // Si llega el fichero con la imagen
-            if (Upload::arrive('picture')) {
+            if (Upload::arrive('portada')) {
                 // Guardamos la imagen
                 $user->picture = Upload::save(
-                    'picture',
+                    'portada',
+                    // Ruta donde se guardará la imagen
                     '../public/' . USER_IMAGE_FOLDER,
+                    // Nombre aleatorio
                     true,
-                    0,
+                    // Tamaño máximo (en bytes)
+                    124000,
                     'image/*',
                     'user_'
                 );

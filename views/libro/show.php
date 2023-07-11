@@ -87,16 +87,13 @@
 
             ?>
         </section>
-
-        <!-- Botones para volver, editar y borrar -->
-        <div class="d-flex justify-content-center gap-2">
-            <a class="btn btn-primary" href="/libro">Volver</a>
-            <a class="btn btn-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
-            <a class="btn btn-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a>
-        </div>
-
-
     </main>
+    <!-- Botones para volver, editar y borrar -->
+    <div class="d-flex justify-content-center gap-2">
+        <a class="btn btn-primary" href="/libro">Volver</a>
+        <a class="btn btn-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
+        <a class="btn btn-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a>
+    </div>
 
     <?= Template::getAltFooter() ?>
 </body>
