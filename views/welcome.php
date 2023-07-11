@@ -19,7 +19,7 @@
 
 
 	<main>
-		<h1>Hello Bitches!</h1>
+		<h2>Bienvenid@ a la Biblioteca de CIFO VIOLETA</h2>
 
 	</main>
 

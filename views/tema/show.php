@@ -36,8 +36,10 @@
     <!-- Botones para volver, editar y borrar -->
     <div class="d-flex justify-content-center gap-2">
         <a class="btn btn-primary" href="/Tema">Volver</a>
-        <a class="btn btn-secondary" href="/Tema/edit/<?= $tema->id ?>">Editar</a>
-        <a class="btn btn-danger" href="/Tema/delete/<?= $tema->id ?>">Borrar</a>
+        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+            <a class="btn btn-secondary" href="/Tema/edit/<?= $tema->id ?>">Editar</a>
+            <a class="btn btn-danger" href="/Tema/delete/<?= $tema->id ?>">Borrar</a>
+        <?php endif; ?>
     </div>
 
     <?= Template::getAltFooter() ?>

@@ -154,8 +154,11 @@ class Template implements TemplateInterface
         $active = $_SERVER['REQUEST_URI'] == '/Libro' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Libro' class='nav-link $active'>Libros</a></li>";
 
-        $active = $_SERVER['REQUEST_URI'] == '/Socio' ? 'active fw-semibold' : '';
-        $html .= "<li class='nav-item '><a href='/Socio' class='nav-link $active'>Socios</a></li>";
+        if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            $active = $_SERVER['REQUEST_URI'] == '/Socio' ? 'active fw-semibold' : '';
+            $html .= "<li class='nav-item '><a href='/Socio' class='nav-link $active'>Socios</a></li>";
+        }
+
 
         $active = $_SERVER['REQUEST_URI'] == '/Tema' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Tema' class='nav-link $active'>Temas</a></li>";
@@ -170,15 +173,16 @@ class Template implements TemplateInterface
         if (Login::check()) {
             $user = Login::user();
             $html .= "<div class='d-flex justify-content-between gap-2 flex-wrap'>";
+            $html .= "<ul class='navbar-nav'>";
             // Si estamos logueados y somos administradores mostramos el botón de administración
             if (Login::isAdmin()) {
                 $active = $_SERVER['REQUEST_URI'] == '/User' ? 'active fw-semibold' : '';
-                $html .= "<div class='nav-item'><a href='/User/create' class='nav-link $active'>Usuarios</a></div>";
+                $html .= "<li class='nav-item'><a href='/User/create' class='nav-link $active'>Usuarios</a></li>";
             }
             $active = $_SERVER['REQUEST_URI'] == '/User' ? 'active fw-semibold' : '';
-            $html .= "<div class='nav-item d-none d-md-block'><a href='/User/home' class='nav-link $active'>$user->displayname</a></div>";
-            $html .= "<div class='nav-item'><a href='/Logout' class='nav-link'>Logout</a></div>";
-
+            $html .= "<li class='nav-item d-none d-md-block'><a href='/User/home' class='nav-link $active'>$user->displayname</a></li>";
+            $html .= "<li class='nav-item'><a href='/Logout' class='nav-link'>Logout</a></li>";
+            $html .= "</ul>";
             $html .= "</div>";
         } else {
             $active = $_SERVER['REQUEST_URI'] == '/Login' ? 'active fw-semibold' : '';

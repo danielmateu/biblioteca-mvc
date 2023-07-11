@@ -22,7 +22,10 @@
         <!-- <h1><?= APP_NAME ?></h1>
         <h2>Lista de libros</h2> -->
         <!-- Tabla que muestra los libros -->
-        <a href="/Libro/create" class="btn btn-outline-primary mb-2">Crear Libro</a>
+        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+
+            <a href="/Libro/create" class="btn btn-outline-primary mb-2">Crear Libro</a>
+        <?php endif; ?>
 
         <table class="table table-dark table-striped table-hover rounded-3">
             <thead>
@@ -46,8 +49,12 @@
                     <!-- <td><?= $libro->isbn ?></td> -->
                     <td class="">
                         <a class="" href=" /Libro/show/<?= $libro->id ?>">🔎</a>
-                        <a class="" href="/Libro/edit/<?= $libro->id ?>">✏️</a>
-                        <a class="" href="/Libro/delete/<?= $libro->id ?>">🗑️</a>
+                        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+                            <a class="" href="/Libro/edit/<?= $libro->id ?>">✏️</a>
+                            <a class="" href="/Libro/delete/<?= $libro->id ?>">🗑️</a>
+
+                        <?php endif; ?>
+
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -59,8 +66,7 @@
     <div class="d-flex justify-content-center gap-2">
         <!-- Botones para volver, editar y borrar -->
         <a class="btn btn-outline-primary" href="/">Volver</a>
-        <!-- <a class="btn btn-outline-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
-        <a class="btn btn-outline-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a> -->
+
     </div>
 
     <?= Template::getAltFooter() ?>
