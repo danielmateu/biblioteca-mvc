@@ -16,13 +16,24 @@ class UserController extends Controller
         ]);
     }
 
-    public function list()
+    public function list(int $page = 1)
     {
         Auth::check(); // solo para usuarios identificados
 
+        // Resuktados por página
+        $limit = RESULTS_PER_PAGE;
+        $total = User::total();
+
+        // Crear el objeto de la paginación
+        $paginator = new Paginator('/User/list', $page, $limit, $total);
+
+        // Obtener los usuarios
+        $users = User::orderBy('id', 'ASC', $limit, $paginator->getOffset());
+
         // método responsable de mostrar el listado de usuarios
         $this->loadView('user/list', [
-            'users' => User::all()
+            'users' => $users,
+            'paginator' => $paginator
         ]);
     }
 

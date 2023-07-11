@@ -11,10 +11,19 @@ class TemaController extends Controller
     }
 
     // Metodo list(): Muestra el listado de temas
-    public function list()
+    public function list(int $page = 1)
     {
+        // Resultados por pagina
+        $limit = RESULTS_PER_PAGE;
+        $total = Tema::total();
+
+        // Crear el objeto de la paginación
+        $paginator = new Paginator('/Tema/list', $page, $limit, $total);
+
+        // Obtener los temas
+        $temas = Tema::orderBy('id', 'ASC', $limit, $paginator->getOffset());
         // Recupera la lista de temas y carga la vista. En la vista disponemos de una variable llamada $temas
-        $this->loadView('tema/list', ['temas' => tema::all()]);
+        $this->loadView('tema/list', ['temas' => $temas, 'paginator' => $paginator]);
     }
 
     // Metodo show(): Muestra los detalles de un tema

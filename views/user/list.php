@@ -21,10 +21,20 @@
     <main>
 
         <section>
+
+            <div class="d-flex align-items-center justify-content-between">
+
+                <?php if (Login::oneRole(['ROLE_ADMIN'])) : ?>
+                    <button class="btn btn-secondary mb-3"><a class="list-group-item" href="/User/create">Crear nuevo usuario</a></button>
+                <?php endif; ?>
+                <div>
+                    <?=
+                    $paginator->stats()
+                    ?>
+                </div>
+            </div>
+
             <!-- Si es admin, mostramos botón para crear nuevos usuarios -->
-            <?php if (Login::oneRole(['ROLE_ADMIN'])) : ?>
-                <button class="btn btn-secondary mb-3"><a class="list-group-item" href="/User/create">Crear nuevo usuario</a></button>
-            <?php endif; ?>
 
             <!-- Tabla que muestra a todos los users -->
 
@@ -57,6 +67,9 @@
                     </tr>
                 <?php endforeach; ?>
             </table>
+
+            <!-- Paginación -->
+            <?= $paginator->links() ?>
 
 
 

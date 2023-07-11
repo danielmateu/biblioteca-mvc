@@ -17,12 +17,14 @@
     <?= (TEMPLATE)::getError() ?>
 
     <main>
-        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
-            <a href="/Tema/create" class="btn btn-outline-primary mb-2">Crear Tema</a>
-        <?php endif; ?>
-
-
-
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="/Tema/create" class="btn btn-outline-primary mb-2 ">Crear Tema</a>
+            <div>
+                <?=
+                $paginator->stats()
+                ?>
+            </div>
+        </div>
 
         <table class="table table-dark  table-striped table-hover rounded-3">
             <tr>
@@ -48,6 +50,7 @@
             <?php endforeach; ?>
 
         </table>
+        <?= $paginator->ellipsisLinks() ?>
 
 
     </main>
