@@ -37,12 +37,11 @@
                     <td class="d-none d-md-table-cell"><?= $tema->id ?></td>
                     <td><?= $tema->tema ?></td>
                     <td class="d-none d-md-table-cell"><?= $tema->descripcion ?></td>
-                    <td class="acciones">
-                        <a href="/tema/show/<?= $tema->id ?>"><span>🔎</span></a>
+                    <td class="">
+                        <button class="btn btn-secondary"><a class="list-group-item" href=" /Tema/show/<?= $tema->id ?>">🔎</a></button>
                         <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
-                            <a class="" href="/Tema/edit/<?= $tema->id ?>">✏️</a>
-                            <a class="" href="/Tema/delete/<?= $tema->id ?>">🗑️</a>
-
+                            <button class="btn btn-secondary"><a class="list-group-item" href="/Tema/delete/<?= $tema->id ?>">🗑️</a></button>
+                            <button class="btn btn-secondary"><a class="list-group-item" href="/Tema/edit/<?= $tema->id ?>">✏️</a></button>
                         <?php endif; ?>
                     </td>
                 </tr>

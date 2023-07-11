@@ -36,10 +36,12 @@
                     <td class="d-none d-md-table-cell"><?= $socio->dni ?></td>
                     <td><?= $socio->nombre ?></td>
                     <td><?= $socio->apellidos ?></td>
-                    <td class="acciones">
-                        <a href="/socio/show/<?= $socio->id ?>"><span>🔎</span></a>
-                        <a href="/socio/edit/<?= $socio->id ?>"><span>✏️</span></a>
-                        <a href="/socio/delete/<?= $socio->id ?>"><span>🗑️</span></a>
+                    <td class="">
+                        <button class="btn btn-secondary"><a class="list-group-item" href=" /Socio/show/<?= $socio->id ?>">🔎</a></button>
+                        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+                            <button class="btn btn-secondary"><a class="list-group-item" href="/Socio/delete/<?= $socio->id ?>">🗑️</a></button>
+                            <button class="btn btn-secondary"><a class="list-group-item" href="/Socio/edit/<?= $socio->id ?>">✏️</a></button>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

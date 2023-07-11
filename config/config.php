@@ -121,7 +121,7 @@ define('USER_PROVIDER', 'User');   // La única opción incluida es User.
 
 // Roles para los usuarios. Podemos crear o eliminar roles según las necesidades.
 define('USER_ROLES', [
-    'Usuario'       => 'ROLE_USER',
+    'Bibliotecario'       => 'ROLE_USER',
     'Administrador' => 'ROLE_ADMIN',
 ]);
 

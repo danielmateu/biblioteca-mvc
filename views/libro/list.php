@@ -48,13 +48,11 @@
                     <td class="d-none d-md-table-cell"><?= $libro->editorial ?></td>
                     <!-- <td><?= $libro->isbn ?></td> -->
                     <td class="">
-                        <a class="" href=" /Libro/show/<?= $libro->id ?>">🔎</a>
+                        <button class="btn btn-secondary"><a class="list-group-item" href=" /Libro/show/<?= $libro->id ?>">🔎</a></button>
                         <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
-                            <a class="" href="/Libro/edit/<?= $libro->id ?>">✏️</a>
-                            <a class="" href="/Libro/delete/<?= $libro->id ?>">🗑️</a>
-
+                            <button class="btn btn-secondary"><a class="list-group-item" href="/Libro/delete/<?= $libro->id ?>">🗑️</a></button>
+                            <button class="btn btn-secondary"><a class="list-group-item" href="/Libro/edit/<?= $libro->id ?>">✏️</a></button>
                         <?php endif; ?>
-
                     </td>
                 </tr>
             <?php endforeach; ?>
