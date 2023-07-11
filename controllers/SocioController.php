@@ -13,6 +13,7 @@ class SocioController extends Controller
     // Metodo list(): Muestra el listado de socios
     public function list()
     {
+
         // Recupera la lista de socios y carga la vista. En la vista disponemos de una variable llamada $socios
         $this->loadView('socio/list', ['socios' => socio::all()]);
     }
@@ -20,6 +21,11 @@ class SocioController extends Controller
     // Metodo show(): Muestra los detalles de un socio
     public function show(int $id = 0)
     {
+
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobar que revcibimos el id del socio por parámetro   
         if (!$id) {
             throw new NotFoundException("No se indicó el socio");
@@ -40,6 +46,10 @@ class SocioController extends Controller
     // Metodo create(): Muestra el formulario para crear un socio
     public function create()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Carga la vista para crear un socio
         $this->loadView('socio/create');
     }
@@ -47,6 +57,10 @@ class SocioController extends Controller
     // Metodo store(): Procesa los datos del formulario de creación de un socio
     public function store()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobar que llegan los datos por POST
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -114,6 +128,10 @@ class SocioController extends Controller
     // Metodo edit(): Muestra el formulario para editar un socio
     public function edit(int $id = 0)
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos que recibimmos el id del socio por parámetro
         if (!$id) {
             throw new NotFoundException("No se indicó el socio");
@@ -134,6 +152,10 @@ class SocioController extends Controller
     // Metodo update(): Procesa los datos del formulario de edición de un socio
     public function update()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Si no llega el formulario con los datos, mostramos error
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -209,6 +231,10 @@ class SocioController extends Controller
     // Metodo delete(): Procesa los datos del formulario de borrado de un socio
     public function delete(int $id = 0)
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos si llega el id del socio a borrar
         if (!$id) {
             throw new NotFoundException("No se indicó el socio");
@@ -229,6 +255,10 @@ class SocioController extends Controller
     // Metodo destroy(): Procesa los datos del borrado de un socio
     public function destroy()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos que llegue el formulario de confirmación
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');

@@ -49,6 +49,11 @@ class LibroController extends Controller
     // Metodo create(): Muestra el formulario para crear un libro
     public function create()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para crear un libro");
+            redirect('/');
+        }
+        // Auth::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN']);
         // Carga la vista para crear un libro
         // $this->loadView('libro/create');
         $listaTemas = Tema::orderBy('tema', 'ASC');
@@ -59,6 +64,11 @@ class LibroController extends Controller
     // Metodo store(): Procesa los datos del formulario de creación de un libro
     public function store()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para crear un libro");
+            redirect('/');
+        }
+        // Auth::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN']);
         // Comprobar que llegan los datos por POST
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -130,6 +140,10 @@ class LibroController extends Controller
     // Metodo edit(): Muestra el formulario para editar un libro
     public function edit(int $id = 0)
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos que recibimmos el id del libro por parámetro
         if (!$id) {
             throw new NotFoundException("No se indicó el libro");
@@ -165,6 +179,10 @@ class LibroController extends Controller
     // Metodo update(): Procesa los datos del formulario de edición de un libro
     public function update()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Si no llega el formulario con los datos, mostramos error
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -255,6 +273,10 @@ class LibroController extends Controller
     // Metodo delete(): Procesa los datos del formulario de borrado de un libro
     public function delete(int $id = 0)
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos si llega el id del libro a borrar
         if (!$id) {
             throw new NotFoundException("No se indicó el libro");
@@ -275,6 +297,10 @@ class LibroController extends Controller
     // Metodo destroy(): Procesa los datos del borrado de un libro
     public function destroy()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos que llegue el formulario de confirmación
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -325,6 +351,10 @@ class LibroController extends Controller
     // Añade un tema a un libro
     public function addTema()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos que llegue el formulario de confirmación
         if (empty($_POST['add'])) {
             throw new Exception('No se recibieron datos');

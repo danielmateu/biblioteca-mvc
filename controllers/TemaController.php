@@ -40,6 +40,10 @@ class TemaController extends Controller
     // Metodo create(): Muestra el formulario para crear un tema
     public function create()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Carga la vista para crear un tema
         $this->loadView('tema/create');
     }
@@ -47,6 +51,10 @@ class TemaController extends Controller
     // Metodo store(): Procesa los datos del formulario de creación de un tema
     public function store()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobar que llegan los datos por POST
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -85,6 +93,10 @@ class TemaController extends Controller
     // Metodo edit(): Muestra el formulario para editar un tema
     public function edit(int $id = 0)
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos que recibimmos el id del tema por parámetro
         if (!$id) {
             throw new NotFoundException("No se indicó el tema");
@@ -105,6 +117,10 @@ class TemaController extends Controller
     // Metodo update(): Procesa los datos del formulario de edición de un tema
     public function update()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Si no llega el formulario con los datos, mostramos error
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -149,6 +165,10 @@ class TemaController extends Controller
     // Metodo delete(): Procesa los datos del formulario de borrado de un tema
     public function delete(int $id = 0)
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos si llega el id del tema a borrar
         if (!$id) {
             throw new NotFoundException("No se indicó el tema");
@@ -169,6 +189,10 @@ class TemaController extends Controller
     // Metodo destroy(): Procesa los datos del borrado de un tema
     public function destroy()
     {
+        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+            Session::error("No tienes permisos para realizar esta acción");
+            redirect('/');
+        }
         // Comprobamos que llegue el formulario de confirmación
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
