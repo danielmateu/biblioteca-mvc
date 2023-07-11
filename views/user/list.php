@@ -31,6 +31,7 @@
             <table class="table table-dark table-striped table-hover rounded-3">
                 <thead>
                     <tr>
+                        <th scope="col" class="">Foto</th>
                         <th scope="col" class="">Nombre</th>
                         <th scope="col" class="">Email</th>
 
@@ -40,6 +41,8 @@
 
                 <?php foreach ($users as $user) : ?>
                     <tr>
+                        <td><img src="<?= USER_IMAGE_FOLDER . '/' . ($user->picture ?? DEFAULT_USER_IMAGE) ?> " alt="Portada del usuario" width="100px" class="cover-mini">
+                        </td>
                         <td><?= $user->displayname ?></td>
                         <td><?= $user->email ?></td>
 
