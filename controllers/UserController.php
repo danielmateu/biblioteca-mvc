@@ -32,19 +32,11 @@ class UserController extends Controller
         Auth::check(); // solo para usuarios identificados
 
         // Recuperamos el id vía GET
-        $id = empty($_GET['id']) ? 0 : $_GET['id'];
-
-        // Si no nos llega el id
-        if (!$id) {
-            throw new Exception('No se indicó el usuario a mostrar');
-        }
-
-        // Recuperamos el usuario
         $user = User::find($id);
 
-        // Si no existe el usuario
+        // Si no existe el User
         if (!$user) {
-            throw new Exception('No existe el usuario indicado');
+            throw new Exception("No se encontró el usuario $id");
         }
 
         // Mostramos la vista de detalles
@@ -133,5 +125,23 @@ class UserController extends Controller
             }
             redirect('/User/create');
         }
+    }
+
+    public function edit(int $id = 0)
+    {
+        Auth::admin(); // solo para administradores
+
+        // Recuperamos el id vía GET
+        $user = User::find($id);
+
+        // Si no existe el User
+        if (!$user) {
+            throw new Exception("No se encontró el usuario $id");
+        }
+
+        // Mostramos la vista de edición
+        $this->loadView('user/edit', [
+            'user' => $user
+        ]);
     }
 }

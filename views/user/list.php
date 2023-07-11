@@ -46,8 +46,9 @@
                         <td class="">
                             <button class="btn btn-secondary"><a class="list-group-item" href=" /User/show/<?= $user->id ?>">🔎</a></button>
                             <?php if (Login::oneRole(['ROLE_ADMIN'])) : ?>
-                                <button class="btn btn-secondary"><a class="list-group-item" href="/User/delete/<?= $user->id ?>">🗑️</a></button>
+
                                 <button class="btn btn-secondary"><a class="list-group-item" href="/User/edit/<?= $user->id ?>">✏️</a></button>
+                                <button class="btn btn-secondary"><a class="list-group-item" href="/User/delete/<?= $user->id ?>">🗑️</a></button>
                             <?php endif; ?>
                         </td>
                     </tr>
