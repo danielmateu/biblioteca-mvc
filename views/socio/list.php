@@ -23,7 +23,7 @@
         <table class="table table-dark  table-striped table-hover rounded-3">
             <tr>
                 <th>Foto</th>
-                <th>DNI</th>
+                <th class="d-none d-md-table-cell">DNI</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Acciones</th>
@@ -33,7 +33,7 @@
                 <tr>
                     <td><img src="<?= SOCIO_IMAGE_FOLDER . '/' . ($socio->foto ?? DEFAULT_SOCIO_IMAGE) ?> " alt="Imagen de perfil" class="cover-mini">
                     </td>
-                    <td><?= $socio->dni ?></td>
+                    <td class="d-none d-md-table-cell"><?= $socio->dni ?></td>
                     <td><?= $socio->nombre ?></td>
                     <td><?= $socio->apellidos ?></td>
                     <td class="acciones">

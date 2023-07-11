@@ -54,14 +54,14 @@
 
         </table>
 
-        <div class="d-flex justify-content-center gap-2">
-            <!-- Botones para volver, editar y borrar -->
-            <a class="btn btn-outline-primary" href="/">Volver</a>
-            <!-- <a class="btn btn-outline-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
-            <a class="btn btn-outline-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a> -->
-        </div>
 
     </main>
+    <div class="d-flex justify-content-center gap-2">
+        <!-- Botones para volver, editar y borrar -->
+        <a class="btn btn-outline-primary" href="/">Volver</a>
+        <!-- <a class="btn btn-outline-secondary" href="/libro/edit/<?= $libro->id ?>">Editar</a>
+        <a class="btn btn-outline-danger" href="/libro/delete/<?= $libro->id ?>">Borrar</a> -->
+    </div>
 
     <?= Template::getAltFooter() ?>
     <!-- Scrip de JS para bootstrap -->

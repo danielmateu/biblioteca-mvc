@@ -22,17 +22,17 @@
 
         <table class="table table-dark  table-striped table-hover rounded-3">
             <tr>
-                <th>ID</th>
+                <th class="d-none d-md-table-cell">ID</th>
                 <th>Tema</th>
-                <th>Descripción</th>
+                <th class="d-none d-md-table-cell">Descripción</th>
                 <th>Acciones</th>
             </tr>
 
             <?php foreach ($temas as $tema) : ?>
                 <tr>
-                    <td><?= $tema->id ?></td>
+                    <td class="d-none d-md-table-cell"><?= $tema->id ?></td>
                     <td><?= $tema->tema ?></td>
-                    <td><?= $tema->descripcion ?></td>
+                    <td class="d-none d-md-table-cell"><?= $tema->descripcion ?></td>
                     <td class="acciones">
                         <a href="/tema/show/<?= $tema->id ?>"><span>🔎</span></a>
                         <a href="/tema/edit/<?= $tema->id ?>"><span>✏️</span></a>
