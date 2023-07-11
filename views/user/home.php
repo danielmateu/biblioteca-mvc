@@ -18,12 +18,12 @@
     <?= Template::getError() ?>
 
 
-    <main>
-        <h1><?= "Hello $user->displayname! Welcome to your Dashboard" ?></h1>
+    <main class="d-flex flex-column align-items-start align-items-md-center gap-2">
+        <h2><?= "Hello $user->displayname! Welcome to your Dashboard" ?></h2>
 
         <!-- Mostramos foto del usuario -->
 
-        <div class="card col-6">
+        <div class="card col-sm-6">
             <!-- No se encuentra la imagen... -->
             <img src="<?= USER_IMAGE_FOLDER . '/' . ($user->picture ?? DEFAULT_USER_IMAGE) ?> " alt="Foto del usuario" class="card-img-top" width="100px">
             <!-- No se encuentra la imagen... -->
