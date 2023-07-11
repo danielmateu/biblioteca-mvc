@@ -22,10 +22,36 @@
         <!-- <h1><?= APP_NAME ?></h1>
         <h2>Lista de libros</h2> -->
         <!-- Tabla que muestra los libros -->
-        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+        <div class="d-flex align-items-center justify-content-between">
 
-            <a href="/Libro/create" class="btn btn-outline-primary mb-2">Crear Libro</a>
-        <?php endif; ?>
+            <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+                <a href="/Libro/create" class="btn btn-outline-primary mb-2">Crear Libro</a>
+            <?php endif; ?>
+
+            <div>
+                <?=
+                $paginator->stats()
+                ?>
+            </div>
+        </div>
+
+        <!-- Buscador y filtrador de libros -->
+        <!-- <form action="/Libro/list" method="get" class="d-flex justify-content-between gap-2 col-4">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar por título" name="search" value="">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+            </div>
+
+            <div class="input-group mb-3">
+                <select class="form-select" name="filter">
+                    <option value="all">Todos</option>
+                    <option value="titulo">Titulo</option>
+                    <option value="autor">Autor</option>
+                    <option value="editorial">Editorial</option>
+                </select>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Filtrar</button>
+            </div>
+        </form> -->
 
         <table class="table table-dark table-striped table-hover rounded-3">
             <thead>
@@ -58,6 +84,10 @@
             <?php endforeach; ?>
 
         </table>
+
+        <!-- Paginación -->
+
+        <?= $paginator->ellipsisLinks() ?>
 
 
     </main>

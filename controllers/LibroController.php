@@ -11,10 +11,22 @@ class LibroController extends Controller
     }
 
     // Metodo list(): Muestra el listado de libros
-    public function list()
+    public function list(int $page = 1)
     {
+        $limit = RESULTS_PER_PAGE; // Resultados por página
+        $total = Libro::total(); // Total de libros
+
+        // Crea el objeto paginador
+        $paginator = new Paginator('/Libro/list', $page, $limit, $total);
+
+        // Recupera los libros para la página actual
+        $libros = Libro::orderBy('titulo', 'ASC', $limit, $paginator->getOffset());
+
         // Recupera la lista de libros y carga la vista. En la vista disponemos de una variable llamada $libros
-        $this->loadView('libro/list', ['libros' => Libro::all()]);
+        $this->loadView('libro/list', [
+            'libros' => $libros,
+            'paginator' => $paginator,
+        ]);
     }
 
     // Metodo show(): Muestra los detalles de un libro

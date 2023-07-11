@@ -159,7 +159,6 @@ class Template implements TemplateInterface
             $html .= "<li class='nav-item '><a href='/Socio' class='nav-link $active'>Socios</a></li>";
         }
 
-
         $active = $_SERVER['REQUEST_URI'] == '/Tema' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Tema' class='nav-link $active'>Temas</a></li>";
 
