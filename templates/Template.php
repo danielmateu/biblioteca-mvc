@@ -148,7 +148,7 @@ class Template implements TemplateInterface
 
         $html .= "<div class='collapse navbar-collapse' id='navbarSupportedContent'>";
 
-        $html .= "<ul class='navbar-nav mr-auto'>";
+        $html .= "<ul class='navbar-nav'>";
 
         // Añadimos la clase active a la página actual
         $active = $_SERVER['REQUEST_URI'] == '/Libro' ? 'active fw-semibold' : '';
@@ -163,26 +163,25 @@ class Template implements TemplateInterface
         $active = $_SERVER['REQUEST_URI'] == '/Contacto' ? 'active fw-semibold' : '';
         $html .= "<li class='nav-item '><a href='/Contacto' class='nav-link $active'>Contacto</a></li>";
 
-        // $html .= "<li class='nav-item'><a href='/Libro' class='nav-link'>Libros</a></li>";
-
-        // $html .= "<li class='nav-item'><a href='/Socio' class='nav-link'>Socios</a></li>";
-
-        // $html .= "<li class='nav-item'><a href='/Tema' class='nav-link'>Temas</a></li>";
-
-        // $html .= "<li class='nav-item'><a href='/Contacto' class='nav-link'>Contacto</a></li>";
-
         $html .= "</ul>";
-
         $html .= "</div>";
 
         // Si estamos logueados mostramos el nombre del usuario y el botón de logout
         if (Login::check()) {
             $user = Login::user();
-            $html .= "<div class='nav-item d-none d-md-block'>$user->displayname</div>";
+            $html .= "<div class='d-flex flex-wrap'>";
+            // Si estamos logueados y somos administradores mostramos el botón de administración
+            if (Login::isAdmin()) {
+                $html .= "<div class='nav-item'><a href='/User/create' class='nav-link'>Usuarios</a></div>";
+            }
+            $html .= "<div class='nav-item d-none d-md-block'><a href='/User/home' class='nav-link'>$user->displayname</a></div>";
             $html .= "<div class='nav-item'><a href='/Logout' class='nav-link'>Logout</a></div>";
+
+            $html .= "</div>";
         } else {
             $html .= "<div class='nav-item'><a href='/Login' class='nav-link'>Login</a></div>";
         }
+
 
 
         $html .= "</nav>";

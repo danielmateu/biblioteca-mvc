@@ -137,7 +137,7 @@ define('ADMIN_ROLE', 'ROLE_ADMIN');
  * REDIRECCIONES
  * -------------------------------------------------------------*/
 
-define('REDIRECT_AFTER_LOGIN', '/'); // Redirección tras login.
+define('REDIRECT_AFTER_LOGIN', '/User/home'); // Redirección tras login.
 
 
 /* -------------------------------------------------------------
@@ -170,3 +170,8 @@ define('DEFAULT_BOOK_IMAGE', 'cover.png');
 define('SOCIO_IMAGE_FOLDER', '/images/socios');
 // Imagen por defecto para los socios
 define('DEFAULT_SOCIO_IMAGE', 'default.png');
+
+// Carpeta para las portadas de los usuarios
+define('USER_IMAGE_FOLDER', '/images/users');
+// Imagen por defecto para los usuarios
+define('DEFAULT_USER_IMAGE', 'default.png');
