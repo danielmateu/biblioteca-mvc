@@ -21,7 +21,7 @@
     <main class="d-flex justify-content-between align-items-center gap-4">
 
         <!-- Formulario para creación de usuario -->
-        <form class="form col-6" method="POST" action="/usuario/store" enctype="multipart/form-data">
+        <form class="form col-6" method="POST" name="user" action="/user/store" enctype="multipart/form-data">
             <!-- <h2>Creación de Usuario</h2> -->
             <!-- Nombre usuario -->
             <div class="mb-3">
@@ -69,7 +69,7 @@
             </div>
 
 
-            <input type="submit" value="Crear usuario" class="button" name="Guardar">
+            <input type="submit" value="Crear usuario" class="button" name="guardar">
         </form>
 
         <!-- Prvisualización -->
@@ -81,7 +81,7 @@
 
     <div class="d-flex justify-content-center gap-2">
         <!-- Botones para volver, editar y borrar -->
-        <a class="btn btn-primary" href="/usuario">Volver</a>
+        <a class="btn btn-primary" href="/user">Volver</a>
         <!-- <a class="btn btn-secondary" href="/usuario/edit/<?= $usuario->id ?>">Editar</a>
         <a class="btn btn-danger" href="/usuario/delete/<?= $usuario->id ?>">Borrar</a> -->
     </div>

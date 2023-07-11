@@ -11,6 +11,15 @@
  */
 class User extends Model implements Authenticable
 {
+    // Propiedades
+    public $id = 0;
+    public $displayname = '';
+    public $email = '';
+    public $phone = '';
+    public $password = '';
+    // public $repeatPassword = '';
+    public $roles = [];
+    public $picture = '';
 
     use Authorizable; // usa el trait authorizable
 
