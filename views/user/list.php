@@ -20,9 +20,12 @@
 
     <main>
 
-
-        <!-- Mostramos los datos del usuario -->
         <section>
+            <!-- Si es admin, mostramos botón para crear nuevos usuarios -->
+            <?php if (Login::oneRole(['ROLE_ADMIN'])) : ?>
+                <button class="btn btn-secondary mb-3"><a class="list-group-item" href="/User/create">Crear nuevo usuario</a></button>
+            <?php endif; ?>
+
             <!-- Tabla que muestra a todos los users -->
 
             <table class="table table-dark table-striped table-hover rounded-3">
