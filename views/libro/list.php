@@ -22,9 +22,60 @@
         <!-- <h1><?= APP_NAME ?></h1>
         <h2>Lista de libros</h2> -->
         <!-- Tabla que muestra los libros -->
+
+        <!-- Filtro y Buscador -->
+        <!-- Si hay un filtro aplicado -->
+        <?php if (!empty($filtro)) { ?>
+
+            <form action="/Libro/list" method="POST">
+                <div class="input-group">
+                    <label for="">Filtro</label>
+                    <input type="submit" value="Quitar filtro" class="btn btn-secondary" name="quitarFiltro">
+                </div>
+            </form>
+        <?php } else {    ?>
+
+            <!-- Si no hay filtros aplicados -->
+            <form action="/Libro/list" class="d-md-flex  justify-content-around">
+                <div class="d-md-flex">
+                    <div class="input-group d-flex mb-2 mb-md-0">
+                        <input class="form-control" type="text" name="texto" placeholder="Buscar..." id="" class="rounded-2">
+                        <select name="campo" id="">
+                            <option value="titulo">Título</option>
+                            <option value="autor">Autor</option>
+                            <option value="editorial">Editorial</option>
+                            <option value="isbn">ISBN</option>
+                        </select>
+                    </div>
+                    <div class="input-group d-flex">
+                        <label for="" class="form-label">Ordenar por:</label>
+                        <select name="campoOrden" id="">
+                            <option value="titulo">Título</option>
+                            <option value="autor">Autor</option>
+                            <option value="editorial">Editorial</option>
+                            <option value="isbn">ISBN</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="input-group">
+                        <input class="form-check-input" type="radio" name="sentidoOrden" value="ASC" id="">
+                        <label for="" class="form-label">Asc</label>
+                    </div>
+                    <div class="input-group">
+                        <input class="form-check-input" type="radio" name="sentidoOrden" value="DESC" id="">
+                        <label for="" class="form-label">Desc</label>
+                    </div>
+                    <input type="submit" value="Filtrar" name='filtrar' class="btn btn-outline-secondary">
+                </div>
+            </form>
+        <?php } ?>
+
+        <!-- FIN Filtro Buscador -->
+
         <div class="d-flex align-items-center justify-content-between">
 
-            <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+            <?php if (Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) : ?>
                 <a href="/Libro/create" class="btn btn-outline-primary mb-2">Crear Libro</a>
             <?php endif; ?>
 
@@ -34,24 +85,6 @@
                 ?>
             </div>
         </div>
-
-        <!-- Buscador y filtrador de libros -->
-        <!-- <form action="/Libro/list" method="get" class="d-flex justify-content-between gap-2 col-4">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar por título" name="search" value="">
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
-            </div>
-
-            <div class="input-group mb-3">
-                <select class="form-select" name="filter">
-                    <option value="all">Todos</option>
-                    <option value="titulo">Titulo</option>
-                    <option value="autor">Autor</option>
-                    <option value="editorial">Editorial</option>
-                </select>
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Filtrar</button>
-            </div>
-        </form> -->
 
         <table class="table table-dark table-striped table-hover rounded-3">
             <thead>
@@ -75,9 +108,9 @@
                     <!-- <td><?= $libro->isbn ?></td> -->
                     <td class="">
                         <button class="btn btn-secondary"><a class="list-group-item" href=" /Libro/show/<?= $libro->id ?>">🔎</a></button>
-                        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
-                            <button class="btn btn-secondary"><a class="list-group-item" href="/Libro/delete/<?= $libro->id ?>">🗑️</a></button>
+                        <?php if (Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) : ?>
                             <button class="btn btn-secondary"><a class="list-group-item" href="/Libro/edit/<?= $libro->id ?>">✏️</a></button>
+                            <button class="btn btn-secondary"><a class="list-group-item" href="/Libro/delete/<?= $libro->id ?>">🗑️</a></button>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -86,8 +119,6 @@
         </table>
 
         <!-- Paginación -->
-
-        <!--  -->
         <?= $paginator->links() ?>
 
 

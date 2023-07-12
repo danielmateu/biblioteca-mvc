@@ -63,7 +63,7 @@
                         <!-- Ediciones -->
                         <div class="mb-3">
                             <label for="ediciones" class="form-label">Edición</label>
-                            <input type="number" name="ediciones" id="ediciones" class="form-control" placeholder="número de edición" value="<?= $libro->ediciones ?>" required>
+                            <input type="number" name="ediciones" id="ediciones" class="form-control" placeholder="número de edición" value="<?= $libro->ediciones ?>" required min=0>
                         </div>
 
                         <!-- Edad recomendada -->

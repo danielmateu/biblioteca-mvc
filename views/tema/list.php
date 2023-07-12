@@ -12,13 +12,15 @@
 <body>
 
     <?= (TEMPLATE)::getMenuBootstrap() ?>
-    <?= (TEMPLATE)::getHeaderAlt('Lista de socios') ?>
+    <?= (TEMPLATE)::getHeaderAlt('Lista de temas') ?>
     <?= (TEMPLATE)::getSuccess() ?>
     <?= (TEMPLATE)::getError() ?>
 
     <main>
         <div class="d-flex align-items-center justify-content-between">
-            <a href="/Tema/create" class="btn btn-outline-primary mb-2 ">Crear Tema</a>
+            <?php if (Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) : ?>
+                <a href="/Tema/create" class="btn btn-outline-primary mb-2 ">Crear Tema</a>
+            <?php endif; ?>
             <div>
                 <?=
                 $paginator->stats()
@@ -41,7 +43,7 @@
                     <td class="d-none d-md-table-cell"><?= $tema->descripcion ?></td>
                     <td class="">
                         <button class="btn btn-secondary"><a class="list-group-item" href=" /Tema/show/<?= $tema->id ?>">🔎</a></button>
-                        <?php if (Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) : ?>
+                        <?php if (Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) : ?>
                             <button class="btn btn-secondary"><a class="list-group-item" href="/Tema/delete/<?= $tema->id ?>">🗑️</a></button>
                             <button class="btn btn-secondary"><a class="list-group-item" href="/Tema/edit/<?= $tema->id ?>">✏️</a></button>
                         <?php endif; ?>

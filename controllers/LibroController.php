@@ -13,14 +13,20 @@ class LibroController extends Controller
     // Metodo list(): Muestra el listado de libros
     public function list(int $page = 1)
     {
+
+        // Comprobar si hay un filtro de búsqueda
+        $filtro = Filter::apply('libros');
+
         $limit = RESULTS_PER_PAGE; // Resultados por página
-        $total = Libro::total(); // Total de libros
+        // $total = Libro::total(); // Total de libros
+        $total = $filtro ? Libro::filteredResults($filtro) : Libro::total(); // Total de libros
 
         // Crea el objeto paginador
         $paginator = new Paginator('/Libro/list', $page, $limit, $total);
 
         // Recupera los libros para la página actual
-        $libros = Libro::orderBy('titulo', 'ASC', $limit, $paginator->getOffset());
+        // $libros = Libro::orderBy('titulo', 'ASC', $limit, $paginator->getOffset());
+        $libros = $filtro ? Libro::filter($filtro, $limit, $paginator->getOffset()) : Libro::orderBy('titulo', 'ASC', $limit, $paginator->getOffset());
 
         // Recupera la lista de libros y carga la vista. En la vista disponemos de una variable llamada $libros
         $this->loadView('libro/list', [
@@ -61,11 +67,11 @@ class LibroController extends Controller
     // Metodo create(): Muestra el formulario para crear un libro
     public function create()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para crear un libro");
             redirect('/');
         }
-        // Auth::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN']);
+        // Auth::oneRole(['ROLE_USER', 'ROLE_ADMIN']);
         // Carga la vista para crear un libro
         // $this->loadView('libro/create');
         $listaTemas = Tema::orderBy('tema', 'ASC');
@@ -76,11 +82,11 @@ class LibroController extends Controller
     // Metodo store(): Procesa los datos del formulario de creación de un libro
     public function store()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para crear un libro");
             redirect('/');
         }
-        // Auth::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN']);
+        // Auth::oneRole(['ROLE_USER', 'ROLE_ADMIN']);
         // Comprobar que llegan los datos por POST
         if (empty($_POST)) {
             throw new Exception('No se recibieron datos');
@@ -152,7 +158,7 @@ class LibroController extends Controller
     // Metodo edit(): Muestra el formulario para editar un libro
     public function edit(int $id = 0)
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -191,7 +197,7 @@ class LibroController extends Controller
     // Metodo update(): Procesa los datos del formulario de edición de un libro
     public function update()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -285,7 +291,7 @@ class LibroController extends Controller
     // Metodo delete(): Procesa los datos del formulario de borrado de un libro
     public function delete(int $id = 0)
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -309,7 +315,7 @@ class LibroController extends Controller
     // Metodo destroy(): Procesa los datos del borrado de un libro
     public function destroy()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -363,7 +369,7 @@ class LibroController extends Controller
     // Añade un tema a un libro
     public function addTema()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }

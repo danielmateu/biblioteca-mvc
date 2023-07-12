@@ -49,7 +49,7 @@ class TemaController extends Controller
     // Metodo create(): Muestra el formulario para crear un tema
     public function create()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -60,7 +60,7 @@ class TemaController extends Controller
     // Metodo store(): Procesa los datos del formulario de creación de un tema
     public function store()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -102,7 +102,7 @@ class TemaController extends Controller
     // Metodo edit(): Muestra el formulario para editar un tema
     public function edit(int $id = 0)
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -126,7 +126,7 @@ class TemaController extends Controller
     // Metodo update(): Procesa los datos del formulario de edición de un tema
     public function update()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -174,7 +174,7 @@ class TemaController extends Controller
     // Metodo delete(): Procesa los datos del formulario de borrado de un tema
     public function delete(int $id = 0)
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
@@ -198,7 +198,7 @@ class TemaController extends Controller
     // Metodo destroy(): Procesa los datos del borrado de un tema
     public function destroy()
     {
-        if (!Login::oneRole(['ROLE_LIBRARIAN', 'ROLE_ADMIN'])) {
+        if (!Login::oneRole(['ROLE_USER', 'ROLE_ADMIN'])) {
             Session::error("No tienes permisos para realizar esta acción");
             redirect('/');
         }
