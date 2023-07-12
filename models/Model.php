@@ -298,8 +298,6 @@ class Model
 
         $entities = ((DB_CLASS)::select($consulta))->total;
 
-        foreach ($entities as $entity)
-            $entity->parseJsonFields();
 
         return $entities;
     }

@@ -27,16 +27,17 @@
         <!-- Si hay un filtro aplicado -->
         <?php if (!empty($filtro)) { ?>
 
-            <form action="/Libro/list" method="POST">
+            <!-- <form action="/Libro/list" method="POST">
                 <div class="input-group">
                     <label>Filtro</label>
                     <input type="submit" value="Quitar filtro" class="btn btn-secondary" name="quitarFiltro">
                 </div>
-            </form>
+            </form> -->
+            <?= Template::removeFilterForm($filtro, '/Libro/list') ?>
         <?php } else {    ?>
 
             <!-- Si no hay filtros aplicados -->
-            <form action="/Libro/list" class="d-md-flex  justify-content-around">
+            <!-- <form action="/Libro/list" class="d-md-flex  justify-content-around">
                 <div class="d-md-flex">
                     <div class="input-group d-flex mb-2 mb-md-0">
                         <input class="form-control" type="text" name="texto" placeholder="Buscar..." class="rounded-2">
@@ -70,7 +71,23 @@
                     </div>
                     <input type="submit" value="Filtrar" name='filtrar' class="btn btn-outline-secondary">
                 </div>
-            </form>
+            </form> -->
+            <?= Template::filterForm(
+                '/Libro/list',
+                [
+                    'título' => 'titulo',
+                    'Autor' => 'autor',
+                    'Editorial' => 'editorial',
+                ],
+                [
+                    'Título' => 'titulo',
+                    'Autor' => 'autor',
+                    'Editorial' => 'editorial'
+                ],
+                'ASC',
+                'DESC'
+            ) ?>
+
         <?php } ?>
 
         <!-- FIN Filtro Buscador -->
