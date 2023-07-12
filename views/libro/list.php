@@ -29,7 +29,7 @@
 
             <form action="/Libro/list" method="POST">
                 <div class="input-group">
-                    <label for="">Filtro</label>
+                    <label>Filtro</label>
                     <input type="submit" value="Quitar filtro" class="btn btn-secondary" name="quitarFiltro">
                 </div>
             </form>
@@ -39,32 +39,34 @@
             <form action="/Libro/list" class="d-md-flex  justify-content-around">
                 <div class="d-md-flex">
                     <div class="input-group d-flex mb-2 mb-md-0">
-                        <input class="form-control" type="text" name="texto" placeholder="Buscar..." id="" class="rounded-2">
-                        <select name="campo" id="">
+                        <input class="form-control" type="text" name="texto" placeholder="Buscar..." class="rounded-2">
+                        <select name="campo">
                             <option value="titulo">Título</option>
                             <option value="autor">Autor</option>
                             <option value="editorial">Editorial</option>
                             <option value="isbn">ISBN</option>
+                            <option value="id">ID</option>
                         </select>
                     </div>
                     <div class="input-group d-flex">
-                        <label for="" class="form-label">Ordenar por:</label>
-                        <select name="campoOrden" id="">
+                        <label class="form-label">Ordenar por:</label>
+                        <select name="campoOrden">
                             <option value="titulo">Título</option>
                             <option value="autor">Autor</option>
                             <option value="editorial">Editorial</option>
                             <option value="isbn">ISBN</option>
+                            <option value="id">ID</option>
                         </select>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="input-group">
-                        <input class="form-check-input" type="radio" name="sentidoOrden" value="ASC" id="">
-                        <label for="" class="form-label">Asc</label>
+                        <input class="form-check-input" type="radio" name="sentidoOrden" value="ASC">
+                        <label class="form-label">Asc</label>
                     </div>
                     <div class="input-group">
-                        <input class="form-check-input" type="radio" name="sentidoOrden" value="DESC" id="">
-                        <label for="" class="form-label">Desc</label>
+                        <input class="form-check-input" type="radio" name="sentidoOrden" value="DESC">
+                        <label class="form-label">Desc</label>
                     </div>
                     <input type="submit" value="Filtrar" name='filtrar' class="btn btn-outline-secondary">
                 </div>

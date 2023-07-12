@@ -19,19 +19,23 @@ class LibroController extends Controller
 
         $limit = RESULTS_PER_PAGE; // Resultados por página
         // $total = Libro::total(); // Total de libros
-        $total = $filtro ? Libro::filteredResults($filtro) : Libro::total(); // Total de libros
+        $total = $filtro ?
+            Libro::filteredResults($filtro) :
+            Libro::total(); // Total de libros
 
         // Crea el objeto paginador
         $paginator = new Paginator('/Libro/list', $page, $limit, $total);
 
         // Recupera los libros para la página actual
         // $libros = Libro::orderBy('titulo', 'ASC', $limit, $paginator->getOffset());
-        $libros = $filtro ? Libro::filter($filtro, $limit, $paginator->getOffset()) : Libro::orderBy('titulo', 'ASC', $limit, $paginator->getOffset());
+        $libros = $filtro ?
+            Libro::filter($filtro, $limit, $paginator->getOffset()) : Libro::orderBy('id', 'ASC', $limit, $paginator->getOffset());
 
         // Recupera la lista de libros y carga la vista. En la vista disponemos de una variable llamada $libros
-        $this->loadView('libro/list', [
+        $this->loadView('Libro/list', [
             'libros' => $libros,
             'paginator' => $paginator,
+            'filtro' => $filtro
         ]);
     }
 
